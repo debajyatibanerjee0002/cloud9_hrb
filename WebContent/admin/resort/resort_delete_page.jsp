@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+    pageEncoding="ISO-8859-1" import="java.sql.*" import="com.connection.SingletonConnection"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -32,7 +32,7 @@
 	        <span class="navbar-nav ml-auto" style="font-size:1.5rem; font-weight:bold; color:white">NEW HOTEL ADD</span>
 	        <ul class="navbar-nav ml-auto">
 	            <li class="nav-item">
-	                <a href="#" class="nav-link custom-button2">Back</a>
+	                <a href="./resort_page.jsp" class="nav-link custom-button2">Back</a>
 	            </li>
 	        </ul>
 	    </div>
@@ -41,24 +41,35 @@
 <section id="#">
 <div class="container">
 	<div class="jumbotron">
-		<form>
+		<form action="/cloud9_hrb/delete_resort" method="post">
 		  
 		  <div class="row mb-3">
-		    <label for="inputEmail3" class="col-sm-2 col-form-label">Select Hotel ID</label>
+		    <label for="inputEmail3" class="col-sm-2 col-form-label">Select Resort ID</label>
 		    <div class="col-sm-10">
-		        <select class="form-select" aria-label="Default select example">
+		        <select class="form-select" aria-label="Default select example" name="resort_id">
 				  <option selected>-- SELECT --</option>
-				  <option value="1">H121DEL</option>
-				  <option value="2">H122DEL</option>
-				  <option value="3">H123DEL</option>
-				  <option value="4">H121MUM</option>
-				  <option value="5">H121PUR</option>
-				  <option value="6">OTHER</option>
+				  <%
+				  	try{
+				  		Connection con = SingletonConnection.getSingletonConnection();
+		    			PreparedStatement psmt;	
+		    			String query = "SELECT RESORT_ID FROM HRB_RESORT";
+		    			psmt = con.prepareStatement(query);
+		    			ResultSet rs = psmt.executeQuery();
+		    			while(rs.next()){
+		    				%>
+		    				<option value="<%=rs.getString("RESORT_ID")%>"><%=rs.getString("RESORT_ID") %></option>
+		    				<%
+		    			}
+				  	}catch(Exception e){
+				  		out.println(e);
+				  	}
+		    			
+		    	  %>
 				</select>
 		    </div>
 		  </div>
 		  
-		  <button type="submit" class="btn btn-primary">DELETE HOTEL</button>
+		  <button type="submit" class="btn btn-primary">DELETE RESORT</button>
 		</form>	
 	</div>
 </div>

@@ -59,7 +59,7 @@
 	<div class="container">
 		<div class="jumbotron img-jmbo">
 			<h1>ROOMS</h1>
-			<a href="#" class="nav-link custom-button1">GO</a>
+			<a href="./room/room_page.jsp" class="nav-link custom-button1">GO</a>
 		</div>
 		<div class="jumbotron img-jmbo">
 			<h1>BOOKINGS</h1>

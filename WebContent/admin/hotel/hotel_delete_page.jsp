@@ -56,7 +56,7 @@
 		    			ResultSet rs = psmt.executeQuery();
 		    			while(rs.next()){
 		    				%>
-		    				<option value="<%=rs.getString("hotel_id")%>"><%=rs.getString("hotel_id") %></option>
+		    				<option value="<%=rs.getString("HOTEL_ID")%>"><%=rs.getString("HOTEL_ID") %></option>
 		    				<%
 		    			}
 				  	}catch(Exception e){

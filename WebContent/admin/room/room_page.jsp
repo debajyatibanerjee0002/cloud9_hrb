@@ -29,10 +29,10 @@
 	        <span class="navbar-toggler-icon"></span>
 	    </button>
 	    <div class="collapse navbar-collapse" id="navbarMenu">
-	        <span class="navbar-nav ml-auto" style="font-size:1.5rem; font-weight:bold; color:white">HOTEL</span>
+	        <span class="navbar-nav ml-auto" style="font-size:1.5rem; font-weight:bold; color:white">ROOM</span>
 	        <ul class="navbar-nav ml-auto">
 	            <li class="nav-item">
-	                <a href="#" class="nav-link custom-button2">Back</a>
+	                <a href="../admin_login_success.jsp" class="nav-link custom-button2">Back</a>
 	            </li>
 	        </ul>
 	    </div>
@@ -42,17 +42,17 @@
 <div class="jumbotron-fluid">
 	<div class="container">
 		<div class="jumbotron img-jmbo">
-			<h1>ADD HOTELS</h1>
+			<h1>ADD ROOMS</h1>
 			<a href="#" class="nav-link custom-button1">GO</a>
 		</div>
 		<div class="jumbotron img-jmbo">
-			<h1>UPDATE HOTELS</h1>
+			<h1>UPDATE ROOMS</h1>
 			<a href="#" class="nav-link custom-button1">GO</a>
 		</div>
 	</div>
 	<div class="container">
 		<div class="jumbotron img-jmbo">
-			<h1>DELETE HOTELS</h1>
+			<h1>DELETE ROOMS</h1>
 			<a href="#" class="nav-link custom-button1">GO</a>
 		</div>
 	</div>

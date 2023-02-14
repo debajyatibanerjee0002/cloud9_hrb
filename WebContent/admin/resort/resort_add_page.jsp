@@ -32,7 +32,7 @@
 	        <span class="navbar-nav ml-auto" style="font-size:1.5rem; font-weight:bold; color:white">NEW RESORT ADD</span>
 	        <ul class="navbar-nav ml-auto">
 	            <li class="nav-item">
-	                <a href="#" class="nav-link custom-button2">Back</a>
+	                <a href="./resort_page.jsp" class="nav-link custom-button2">Back</a>
 	            </li>
 	        </ul>
 	    </div>
@@ -41,47 +41,33 @@
 <section id="#">
 <div class="container">
 	<div class="jumbotron">
-		<form>
+		<form action="/cloud9_hrb/add_resort" method="post">
 		  <div class="row mb-3">
 		    <label for="inputEmail3" class="col-sm-2 col-form-label">Resort ID</label>
 		    <div class="col-sm-10">
-		      <input type="text" class="form-control" id="inputEmail3">
+		      <input type="text" class="form-control" id="inputEmail3" name="resort_id" required>
 		    </div>
 		  </div>
 		  
 		  <div class="row mb-3">
 		    <label for="inputEmail3" class="col-sm-2 col-form-label">Resort Name</label>
 		    <div class="col-sm-10">
-		      <input type="text" class="form-control" id="inputEmail3">
-		    </div>
-		  </div>
-		  
-		  <div class="row mb-3">
-		    <label for="inputEmail3" class="col-sm-2 col-form-label">Upload Image</label>
-		    <div class="col-sm-10">
-		      <input type="file" class="form-control" id="inputEmail3">
+		      <input type="text" class="form-control" id="inputEmail3" name="resort_name" required>
 		    </div>
 		  </div>
 		  
 		  <div class="row mb-3">
 		    <label for="inputEmail3" class="col-sm-2 col-form-label">Location</label>
 		    <div class="col-sm-10">
-		        <select class="form-select" aria-label="Default select example">
+		        <select class="form-select" aria-label="Default select example" name="resort_addr" required>
 				  <option selected>-- SELECT --</option>
-				  <option value="1">KOLKATA</option>
-				  <option value="2">MUMBAI</option>
-				  <option value="3">DELHI</option>
-				  <option value="4">GOA</option>
-				  <option value="5">PURI</option>
-				  <option value="6">OTHER</option>
+				  <option value="kolkata">KOLKATA</option>
+				  <option value="mumbai">MUMBAI</option>
+				  <option value="delhi">DELHI</option>
+				  <option value="goa">GOA</option>
+				  <option value="puri">PURI</option>
+				  <option value="other">OTHER</option>
 				</select>
-		    </div>
-		  </div>
-		  
-		  <div class="row mb-3">
-		    <label for="inputEmail3" class="col-sm-2 col-form-label">ZIP</label>
-		    <div class="col-sm-10">
-		      <input type="number" class="form-control" id="inputEmail3">
 		    </div>
 		  </div>
 		  
@@ -89,7 +75,7 @@
 		    <label for="inputEmail3" class="col-sm-2 col-form-label">Resort Type</label>
 		    <div class="col-sm-10">
 		        <div class="slidecontainer">
-				  <input type="range" min="1" max="5" value="1" class="slider" id="myRange">
+				  <input type="range" min="1" max="5" value="1" class="slider" id="myRange" name="resort_type" required>
 				  <span id="demo"></span>
 				  <span>STAR</span>
 				</div>
@@ -97,43 +83,20 @@
 		  </div>
 		  
 		  <div class="row mb-3">
-		    <label for="inputEmail3" class="col-sm-2 col-form-label">Room Types</label>
-		    <div class="form-check">
-		    	<div class="container">
-		    		<input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-			  		<label class="form-check-label" for="flexCheckDefault">Single</label>
-		    	</div>
-		    	<div class="container">
-		    		<input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-			  		<label class="form-check-label" for="flexCheckDefault">Double</label>
-		    	</div>
-		    	<div class="container">
-		    		<input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-			  		<label class="form-check-label" for="flexCheckDefault">Deluxe</label>
-		    	</div>
-
-			</div>
-		  </div>
-		  
-		  <div class="row mb-3">
 		    <label for="inputEmail3" class="col-sm-2 col-form-label">Total Rooms</label>
 		    <div class="col-sm-10">
-		      <input type="number" class="form-control" id="inputEmail3">
+		      <input type="number" class="form-control" id="inputEmail3" name="total_rooms" required>
 		    </div>
 		  </div>
 		  
 		  <div class="row mb-3">
 		    <label for="inputEmail3" class="col-sm-2 col-form-label">Resort Price</label>
 		    <div class="col-sm-10">
-		      <input type="number" class="form-control" id="inputEmail3">
+		      <input type="number" class="form-control" id="inputEmail3" name="resort_price" required>
 		    </div>
-		  </div>
+		  </div>	  
 		  
-		  
-		  
-		  
-		  
-		  <button type="submit" class="btn btn-primary">ADD HOTEL</button>
+		  <button type="submit" class="btn btn-primary">ADD RESORT</button>
 		</form>	
 	</div>
 </div>
