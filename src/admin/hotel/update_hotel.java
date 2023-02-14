@@ -4,23 +4,19 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import com.connection.SingletonConnection;
 
-
-@WebServlet("/add_hotel")
-public class add_hotel extends HttpServlet {
+@WebServlet("/update_hotel")
+public class update_hotel extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-    public add_hotel() {
+    public update_hotel() {
         super();
     }
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -41,30 +37,30 @@ public class add_hotel extends HttpServlet {
 			double room_price3 = Double.valueOf(request.getParameter("room_price3"));
 			
 			
-			String query = "INSERT INTO HRB_HOTEL VALUES(?,?,?,?,?,?,?,?)";
+			String query = "UPDATE HRB_HOTEL SET HOTEL_NAME=?, HOTEL_ROOM_TYPE=?, HOTEL_ADDR=?, SINGLE_ROOM_PRICE=?, DOUBLE_ROOM_PRICE=?, DELUXE_ROOM_PRICE=?, HOTEL_TYPE=? WHERE HOTEL_ID=?";
 			psmt = conn.prepareStatement(query);
-			psmt.setString(1, hotel_id);
-			psmt.setString(2, hotel_name);
-			psmt.setString(3, room_type);
-			psmt.setString(4, location);
-			psmt.setDouble(5, room_price1);
-			psmt.setDouble(6, room_price2);
-			psmt.setDouble(7, room_price3);
-			psmt.setInt(8, hotel_type);
+			psmt.setString(1, hotel_name);
+			psmt.setString(2, room_type);
+			psmt.setString(3, location);
+			psmt.setDouble(4, room_price1);
+			psmt.setDouble(5, room_price2);
+			psmt.setDouble(6, room_price3);
+			psmt.setInt(7, hotel_type);
+			psmt.setString(8, hotel_id);
 			int rn = psmt.executeUpdate();
 			if(rn>0){
 				response.sendRedirect("./admin/hotel/hotel_page.jsp");
 			}
 			else{
-				response.sendRedirect("./admin/hotel/hotel_add_page.jsp");
+				response.sendRedirect("./admin/hotel/hotel_update_select_page.jsp");
 			}
 			
 		}catch(Exception e){
 			out.print(e);
 		}
 	}
+
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
 

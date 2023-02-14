@@ -32,7 +32,7 @@
 	        <span class="navbar-nav ml-auto" style="font-size:1.5rem; font-weight:bold; color:white">HOTEL</span>
 	        <ul class="navbar-nav ml-auto">
 	            <li class="nav-item">
-	                <%-- <a href="../admin_login_success.jsp" class="nav-link custom-button2">Back</a>--%>
+	                <a href="../admin_login_success.jsp" class="nav-link custom-button2">Back</a>
 	            </li>
 	        </ul>
 	    </div>

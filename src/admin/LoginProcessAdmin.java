@@ -39,8 +39,9 @@ public class LoginProcessAdmin extends HttpServlet {
 			if(rs.next()){
 				HttpSession session = request.getSession();
 				session.setAttribute("uname", uname);
-				RequestDispatcher requestDispatcher = request.getRequestDispatcher("admin/admin_login_success.jsp");
-				requestDispatcher.forward(request, response);
+				response.sendRedirect("admin/admin_login_success.jsp");
+//				RequestDispatcher requestDispatcher = request.getRequestDispatcher("admin/admin_login_success.jsp");
+//				requestDispatcher.forward(request, response);
 			}else{
 				RequestDispatcher requestDispatcher = request.getRequestDispatcher("admin/admin_login_error.jsp");
 				requestDispatcher.include(request, response);

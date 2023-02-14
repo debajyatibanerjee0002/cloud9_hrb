@@ -41,11 +41,11 @@
 <section id="#">
 <div class="container">
 	<div class="jumbotron">
-		<form action="" method="post">		  
+		<form action="./hotel_update_page.jsp" method="post">		  
 		  <div class="row mb-3">
 		    <label for="inputEmail3" class="col-sm-2 col-form-label">Select Hotel ID</label>
 		    <div class="col-sm-10">
-		        <select class="form-select" aria-label="Default select example" name="hotel_id">
+		        <select class="form-select" aria-label="Default select example" name="hotel_id" >
 				  <option selected>-- SELECT --</option>
 				  <%
 				  	try{
@@ -68,7 +68,7 @@
 		    </div>
 		  </div>
 		  
-		  <button type="submit" class="btn btn-primary">UPDATE HOTEL</button>
+		  <button type="submit" class="btn btn-primary">GO</button>
 		</form>	
 	</div>
 </div>

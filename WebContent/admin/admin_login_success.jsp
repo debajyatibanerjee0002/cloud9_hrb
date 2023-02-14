@@ -19,14 +19,15 @@
 <link href="fontawesome/css/fontawesome.css" rel="stylesheet">
 <link href="fontawesome/css/brands.css" rel="stylesheet">
 <link href="fontawesome/css/solid.css" rel="stylesheet">
-<link href="../${pageContext.request.contextPath}/styles/admin_login_success.css" rel="stylesheet">
-
+<link href="../styles/admin_login_success.css" rel="stylesheet">
+<!-- /${pageContext.request.contextPath} -->
 </head>
 <body>
 <section>
 	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
 	    <a href="#" class="navbar-brand logoText" >
-		    <img src="../<%=request.getContextPath() %>/images/CLOUD9.png" alt="Bootstrap" width="50" height="50">
+	    	<!-- /<%=request.getContextPath() %> -->
+		    <img src="../images/CLOUD9.png" alt="Bootstrap" width="50" height="50">
 		    Cloud9
 	    </a>
 	    <button class="navbar-toggler" data-toggle="collapse" data-target="#navbarMenu">
@@ -36,7 +37,8 @@
 	        <span class="navbar-nav ml-auto" style="font-size:1.5rem; font-weight:bold; color:white"><%=uname %></span>
 	        <ul class="navbar-nav ml-auto">
 	            <li class="nav-item">
-	                <a href="../<%=request.getContextPath() %>/logout/logout.jsp" class="nav-link custom-button">LOG OUT</a>
+	            	<!-- /<%=request.getContextPath() %> -->
+	                <a href="../logout/logout.jsp" class="nav-link custom-button">LOG OUT</a>
 	            </li>
 	        </ul>
 	    </div>
@@ -47,11 +49,11 @@
 	<div class="container">
 		<div class="jumbotron img-jmbo">
 			<h1>HOTELS</h1>
-			<a href="admin/hotel/hotel_page.jsp" class="nav-link custom-button1">GO</a>
+			<a href="./hotel/hotel_page.jsp" class="nav-link custom-button1">GO</a>
 		</div>
 		<div class="jumbotron img-jmbo">
 			<h1>RESORTS</h1>
-			<a href="#" class="nav-link custom-button1">GO</a>
+			<a href="./resort/resort_page.jsp" class="nav-link custom-button1">GO</a>
 		</div>
 	</div>
 	<div class="container">

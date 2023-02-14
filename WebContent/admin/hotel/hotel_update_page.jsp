@@ -1,5 +1,30 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+    pageEncoding="ISO-8859-1" import="java.sql.*" import="com.connection.SingletonConnection"%>
+<%
+	String hotel_id = request.getParameter("hotel_id");
+	String hotel_name="";
+	String hotel_room_type="";
+	String hotel_addr="";
+	double room_price1=0.0;
+	double room_price2=0.0;
+	double room_price3=0.0;
+	int hotel_type=1;
+	Connection con = SingletonConnection.getSingletonConnection();
+	PreparedStatement psmt;
+	String query = "SELECT * FROM HRB_HOTEL WHERE HOTEL_ID=?";
+	psmt = con.prepareStatement(query);
+	psmt.setString(1, hotel_id);
+	ResultSet rs = psmt.executeQuery();
+	if(rs.next()){
+		hotel_name = rs.getString("HOTEL_NAME");
+		hotel_room_type = rs.getString("HOTEL_ROOM_TYPE");
+		hotel_addr = rs.getString("HOTEL_ADDR");
+		room_price1 = rs.getDouble("SINGLE_ROOM_PRICE");
+		room_price2 = rs.getDouble("DOUBLE_ROOM_PRICE");
+		room_price3 = rs.getDouble("DELUXE_ROOM_PRICE");
+		hotel_type = rs.getInt("HOTEL_TYPE");
+	}
+%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -32,7 +57,7 @@
 	        <span class="navbar-nav ml-auto" style="font-size:1.5rem; font-weight:bold; color:white">HOTEL UPDATE</span>
 	        <ul class="navbar-nav ml-auto">
 	            <li class="nav-item">
-	                <a href="./hotel_page.jsp" class="nav-link custom-button2">Back</a>
+	                <a href="./hotel_update_select_page.jsp" class="nav-link custom-button2">Back</a>
 	            </li>
 	        </ul>
 	    </div>
@@ -41,39 +66,32 @@
 <section id="#">
 <div class="container">
 	<div class="jumbotron">
-		<form>
+		<form action="/cloud9_hrb/update_hotel" method="POST">
 		  <div class="row mb-3">
 		    <label for="inputEmail3" class="col-sm-2 col-form-label">Hotel ID</label>
 		    <div class="col-sm-10">
-		      <input type="text" class="form-control" id="inputEmail3">
+		      <input type="text" class="form-control" id="inputEmail3" value="<%=hotel_id %>" name="hotel_id" readonly>
 		    </div>
 		  </div>
 		  <div class="row mb-3">
-		    <label for="inputEmail3" class="col-sm-2 col-form-label">Hotel Name</label>
+		    <label for="inputEmail3" class="col-sm-2 col-form-label" >Hotel Name</label>
 		    <div class="col-sm-10">
-		      <input type="text" class="form-control" id="inputEmail3">
+		      <input type="text" class="form-control" id="inputEmail3" value="<%=hotel_name %>" name="hotel_name">
 		    </div>
 		  </div>
 		  
 		  <div class="row mb-3">
 		    <label for="inputEmail3" class="col-sm-2 col-form-label">Location</label>
 		    <div class="col-sm-10">
-		        <select class="form-select" aria-label="Default select example">
-				  <option selected>-- SELECT --</option>
-				  <option value="1">KOLKATA</option>
-				  <option value="2">MUMBAI</option>
-				  <option value="3">DELHI</option>
-				  <option value="4">GOA</option>
-				  <option value="5">PURI</option>
-				  <option value="6">OTHER</option>
+		        <select class="form-select" aria-label="Default select example" name="location">
+				  <option value="<%=hotel_addr %>"><%=hotel_addr %></option>
+				  <option value="kolkata">KOLKATA</option>
+				  <option value="mumbai">MUMBAI</option>
+				  <option value="delhi">DELHI</option>
+				  <option value="goa">GOA</option>
+				  <option value="puri">PURI</option>
+				  <option value="other">OTHER</option>
 				</select>
-		    </div>
-		  </div>
-		  
-		  <div class="row mb-3">
-		    <label for="inputEmail3" class="col-sm-2 col-form-label">ZIP</label>
-		    <div class="col-sm-10">
-		      <input type="number" class="form-control" id="inputEmail3">
 		    </div>
 		  </div>
 		  
@@ -81,7 +99,7 @@
 		    <label for="inputEmail3" class="col-sm-2 col-form-label">Hotel Type</label>
 		    <div class="col-sm-10">
 		        <div class="slidecontainer">
-				  <input type="range" min="1" max="5" value="1" class="slider" id="myRange">
+				  <input type="range" min="1" max="5" value="value="<%=hotel_type %>"" class="slider" id="myRange" name="hotel_type">
 				  <span id="demo"></span>
 				  <span>STAR</span>
 				</div>
@@ -89,78 +107,34 @@
 		  </div>
 		  
 		  <div class="row mb-3">
-		    <label for="inputEmail3" class="col-sm-2 col-form-label">Room Types</label>
-		    <div class="form-check">
-		    	<div class="container">
-		    		<input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-			  		<label class="form-check-label" for="flexCheckDefault">Single</label>
-		    	</div>
-		    	<div class="container">
-		    		<input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-			  		<label class="form-check-label" for="flexCheckDefault">Double</label>
-		    	</div>
-		    	<div class="container">
-		    		<input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-			  		<label class="form-check-label" for="flexCheckDefault">Deluxe</label>
-		    	</div>
-
-			</div>
-		  </div>
-		  
-		  <div class="row mb-3">
-		    <label for="inputEmail3" class="col-sm-2 col-form-label">Total Rooms</label>
+		    <label for="inputEmail3" class="col-sm-2 col-form-label" >Hotel Room Type</label>
 		    <div class="col-sm-10">
-		      <input type="number" class="form-control" id="inputEmail3">
+		      <input type="text" class="form-control" id="inputEmail3" value="<%=hotel_room_type %>" name="room_type">
 		    </div>
-		  </div>
-		  
-		  <div class="row mb-3">
-		    <label for="inputEmail3" class="col-sm-2 col-form-label">Empty Single Rooms</label>
-		    <div class="col-sm-10">
-		      <input type="number" class="form-control" id="inputEmail3">
-		    </div>
-		  </div>
-		  
-		  <div class="row mb-3">
-		    <label for="inputEmail3" class="col-sm-2 col-form-label">Empty Double Rooms</label>
-		    <div class="col-sm-10">
-		      <input type="number" class="form-control" id="inputEmail3">
-		    </div>
-		  </div>
-		  
-		  <div class="row mb-3">
-		    <label for="inputEmail3" class="col-sm-2 col-form-label">Empty Deluxe Rooms</label>
-		    <div class="col-sm-10">
-		      <input type="number" class="form-control" id="inputEmail3">
-		    </div>
-		  </div>
-		  
+		  </div>	  
+		  		  
 		  <div class="row mb-3">
 		    <label for="inputEmail3" class="col-sm-2 col-form-label">Single Room Price</label>
 		    <div class="col-sm-10">
-		      <input type="number" class="form-control" id="inputEmail3">
+		      <input type="number" class="form-control" id="inputEmail3" value="<%=room_price1 %>" name="room_price1">
 		    </div>
 		  </div>
 		  
 		  <div class="row mb-3">
 		    <label for="inputEmail3" class="col-sm-2 col-form-label">Double Room Price</label>
 		    <div class="col-sm-10">
-		      <input type="number" class="form-control" id="inputEmail3">
+		      <input type="number" class="form-control" id="inputEmail3" value="<%=room_price2 %>" name="room_price2">
 		    </div>
 		  </div>
 		  
 		  <div class="row mb-3">
 		    <label for="inputEmail3" class="col-sm-2 col-form-label">Deluxe Room Price</label>
 		    <div class="col-sm-10">
-		      <input type="number" class="form-control" id="inputEmail3">
+		      <input type="number" class="form-control" id="inputEmail3" value="<%=room_price3 %>" name="room_price3">
 		    </div>
-		  </div>
+		  </div>	  
 		  
-		  
-		  
-		  
-		  
-		  <button type="submit" class="btn btn-primary">ADD HOTEL</button>
+		  <button type="submit" class="btn btn-primary">UPDATE HOTEL</button>
 		</form>	
 	</div>
 </div>

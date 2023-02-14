@@ -45,20 +45,20 @@
 		  <div class="row mb-3">
 		    <label for="inputEmail3" class="col-sm-2 col-form-label">Hotel ID</label>
 		    <div class="col-sm-10">
-		      <input type="text" class="form-control" id="inputEmail3" name="hotel_id">
+		      <input type="text" class="form-control" id="inputEmail3" name="hotel_id" required>
 		    </div>
 		  </div>
 		  <div class="row mb-3">
 		    <label for="inputEmail3" class="col-sm-2 col-form-label" >Hotel Name</label>
 		    <div class="col-sm-10">
-		      <input type="text" class="form-control" id="inputEmail3" name="hotel_name">
+		      <input type="text" class="form-control" id="inputEmail3" name="hotel_name" required>
 		    </div>
 		  </div>
 		  
 		  <div class="row mb-3">
 		    <label for="inputEmail3" class="col-sm-2 col-form-label">Location</label>
 		    <div class="col-sm-10">
-		        <select class="form-select" aria-label="Default select example" name="location">
+		        <select class="form-select" aria-label="Default select example" name="location" required>
 				  <option selected>-- SELECT --</option>
 				  <option value="kolkata">KOLKATA</option>
 				  <option value="mumbai">MUMBAI</option>
@@ -71,17 +71,10 @@
 		  </div>
 		  
 		  <div class="row mb-3">
-		    <label for="inputEmail3" class="col-sm-2 col-form-label">ZIP</label>
-		    <div class="col-sm-10">
-		      <input type="number" class="form-control" id="inputEmail3" name="zip">
-		    </div>
-		  </div>
-		  
-		  <div class="row mb-3">
 		    <label for="inputEmail3" class="col-sm-2 col-form-label">Hotel Type</label>
 		    <div class="col-sm-10">
 		        <div class="slidecontainer">
-				  <input type="range" min="1" max="5" value="1" class="slider" id="myRange" name="hotel_type">
+				  <input type="range" min="1" max="5" value="1" class="slider" id="myRange" name="hotel_type" required>
 				  <span id="demo"></span>
 				  <span>STAR</span>
 				</div>
@@ -91,28 +84,28 @@
 		  <div class="row mb-3">
 		    <label for="inputEmail3" class="col-sm-2 col-form-label" >Hotel Room Type</label>
 		    <div class="col-sm-10">
-		      <input type="text" class="form-control" id="inputEmail3" name="room_type">
+		      <input type="text" class="form-control" id="inputEmail3" name="room_type" required>
 		    </div>
 		  </div>	  
 		  		  
 		  <div class="row mb-3">
 		    <label for="inputEmail3" class="col-sm-2 col-form-label">Single Room Price</label>
 		    <div class="col-sm-10">
-		      <input type="number" class="form-control" id="inputEmail3" name="room_price1">
+		      <input type="number" class="form-control" id="inputEmail3" name="room_price1" required>
 		    </div>
 		  </div>
 		  
 		  <div class="row mb-3">
 		    <label for="inputEmail3" class="col-sm-2 col-form-label">Double Room Price</label>
 		    <div class="col-sm-10">
-		      <input type="number" class="form-control" id="inputEmail3" name="room_price2">
+		      <input type="number" class="form-control" id="inputEmail3" name="room_price2" required>
 		    </div>
 		  </div>
 		  
 		  <div class="row mb-3">
 		    <label for="inputEmail3" class="col-sm-2 col-form-label">Deluxe Room Price</label>
 		    <div class="col-sm-10">
-		      <input type="number" class="form-control" id="inputEmail3" name="room_price3">
+		      <input type="number" class="form-control" id="inputEmail3" name="room_price3" required>
 		    </div>
 		  </div>	  
 		  

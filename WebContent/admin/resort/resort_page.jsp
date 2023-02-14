@@ -32,7 +32,7 @@
 	        <span class="navbar-nav ml-auto" style="font-size:1.5rem; font-weight:bold; color:white">RESORT</span>
 	        <ul class="navbar-nav ml-auto">
 	            <li class="nav-item">
-	                <a href="#" class="nav-link custom-button2">Back</a>
+	                <a href="../admin_login_success.jsp" class="nav-link custom-button2">Back</a>
 	            </li>
 	        </ul>
 	    </div>
@@ -43,17 +43,17 @@
 	<div class="container">
 		<div class="jumbotron img-jmbo">
 			<h1>ADD RESORTS</h1>
-			<a href="#" class="nav-link custom-button1">GO</a>
+			<a href="./resort_add_page.jsp" class="nav-link custom-button1">GO</a>
 		</div>
 		<div class="jumbotron img-jmbo">
 			<h1>UPDATE RESORTS</h1>
-			<a href="#" class="nav-link custom-button1">GO</a>
+			<a href="./resort_update_select_page.jsp" class="nav-link custom-button1">GO</a>
 		</div>
 	</div>
 	<div class="container">
 		<div class="jumbotron img-jmbo">
 			<h1>DELETE RESORTS</h1>
-			<a href="#" class="nav-link custom-button1">GO</a>
+			<a href="./resort_delete_page.jsp" class="nav-link custom-button1">GO</a>
 		</div>
 	</div>
 	</div>
