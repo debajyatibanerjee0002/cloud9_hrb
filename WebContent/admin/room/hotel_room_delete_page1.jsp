@@ -3,7 +3,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<title>Room Add Page</title>
+<title>Hotel Room Select Page</title>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
     crossorigin="anonymous">
@@ -16,7 +16,42 @@
 <link href="fontawesome/css/brands.css" rel="stylesheet">
 <link href="fontawesome/css/solid.css" rel="stylesheet">
 <link href="../../styles/form_page.css" rel="stylesheet">
-
+<script>
+	var request;
+	function sendinfo()
+	{
+		var v=document.vinform.hotel_id.value;
+		var url="./hotel_room_delete_page2.jsp?val="+v;
+		// To get the browser Info
+		if(window.XMLHttpRequest)
+		{
+			request = new XMLHttpRequest();
+		}
+		else if(window.ActiveXObject)
+		{
+			request = new ActiveXObject("MicrosoftXMLHTTP");
+		}
+		try
+		{
+			request.onreadystatechange = getinfo; // 3
+			request.open("GET", url, true); // 1
+			request.send(); // 2
+		}
+		catch(e)
+		{
+			alert("Unable to connect the server");
+		}
+		
+		function getinfo()
+		{
+			if(request.readyState==4 && this.status == 200)
+			{
+				var val = request.responseText;
+				document.getElementById("demo").innerHTML = val;
+			}
+		}
+	}
+</script>
 </head>
 <body>
 <section>
@@ -29,7 +64,7 @@
 	        <span class="navbar-toggler-icon"></span>
 	    </button>
 	    <div class="collapse navbar-collapse" id="navbarMenu">
-	        <span class="navbar-nav ml-auto" style="font-size:1.5rem; font-weight:bold; color:white">NEW ROOM ADD</span>
+	        <span class="navbar-nav ml-auto" style="font-size:1.5rem; font-weight:bold; color:white">HOTEL ID SELECT</span>
 	        <ul class="navbar-nav ml-auto">
 	            <li class="nav-item">
 	                <a href="./room_page.jsp" class="nav-link custom-button2">Back</a>
@@ -41,18 +76,11 @@
 <section id="#">
 <div class="container">
 	<div class="jumbotron">
-		<form action="/cloud9_hrb/add_room" method="post">
+		<form name="vinform" method="post">		  
 		  <div class="row mb-3">
-		    <label for="inputEmail3" class="col-sm-2 col-form-label">Room ID</label>
+		    <label for="inputEmail3" class="col-sm-2 col-form-label">Select Hotel ID</label>
 		    <div class="col-sm-10">
-		      <input type="text" class="form-control" id="inputEmail3" name="room_id" required>
-		    </div>
-		  </div>
-		  
-		  <div class="row mb-3">
-		    <label for="inputEmail3" class="col-sm-2 col-form-label">Hotel ID</label>
-		    <div class="col-sm-10">
-		        <select class="form-select" aria-label="Default select example" name="hotel_id" >
+		        <select class="form-select" aria-label="Default select example" name="hotel_id" onchange="sendinfo()">
 				  <option selected>-- SELECT --</option>
 				  <%
 				  	try{
@@ -74,55 +102,11 @@
 				</select>
 		    </div>
 		  </div>
-		  
-		  <div class="row mb-3">
-		    <label for="inputEmail3" class="col-sm-2 col-form-label">A/C</label>
-		    <div class="col-sm-10">
-		        <select class="form-select" aria-label="Default select example" name="ac">
-				  <option selected>-- SELECT --</option>
-				  <option value="yes">Yes</option>
-				  <option value="no">No</option>
-				</select>
-		    </div>
-		  </div>
-		  
-		  <div class="row mb-3">
-		    <label for="inputEmail3" class="col-sm-2 col-form-label">WiFi</label>
-		    <div class="col-sm-10">
-		        <select class="form-select" aria-label="Default select example" name="wifi">
-				  <option selected>-- SELECT --</option>
-				  <option value="yes">Yes</option>
-				  <option value="no">No</option>
-				</select>
-		    </div>
-		  </div>
-		  
-		  <div class="row mb-3">
-		    <label for="inputEmail3" class="col-sm-2 col-form-label">Room Type</label>
-		    <div class="col-sm-10">
-		        <select class="form-select" aria-label="Default select example" name="room_type">
-				  <option selected>-- SELECT --</option>
-				  <option value="single">Single</option>
-				  <option value="double">Double</option>
-				  <option value="deluxe">Deluxe</option>
-				</select>
-		    </div>
-		  </div>
-		  
-		  <div class="row mb-3">
-		    <label for="inputEmail3" class="col-sm-2 col-form-label">Available</label>
-		    <div class="col-sm-10">
-		        <select class="form-select" aria-label="Default select example" name="available">
-				  <option selected>-- SELECT --</option>
-				  <option value="yes">Yes</option>
-				  <option value="no">No</option>
-				</select>
-		    </div>
-		  </div>		  
-		  <button type="submit" class="btn btn-primary">ADD ROOM</button>
+		  <!--  <button type="button" class="btn btn-primary" onClick="sendinfo()">GO</button> -->
 		</form>	
 	</div>
 </div>
+<span id="demo"></span>
 </section>
 	
 	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"

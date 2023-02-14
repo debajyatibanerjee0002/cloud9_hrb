@@ -1,9 +1,33 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1" import="java.sql.*" import="com.connection.SingletonConnection"%>
+    
+<%
+	String room_id = request.getParameter("room_id");
+	String hotel_id="";
+	String ac="";
+	String wifi="";
+	String room_type="";
+	String available="";
+	Connection con = SingletonConnection.getSingletonConnection();
+	PreparedStatement psmt;
+	String query = "SELECT * FROM HRB_ROOM WHERE ROOM_ID=?";
+	psmt = con.prepareStatement(query);
+	psmt.setString(1, room_id);
+	ResultSet rs = psmt.executeQuery();
+	if(rs.next()){
+		hotel_id = rs.getString("HOTEL_ID");
+		ac = rs.getString("AC");
+		wifi = rs.getString("WIFI");
+		room_type = rs.getString("ROOM_TYPE");
+		available = rs.getString("AVAILABLE");
+	}
+%>
+
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<title>Room Add Page</title>
+<title>Room Update Page</title>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
     crossorigin="anonymous">
@@ -29,7 +53,7 @@
 	        <span class="navbar-toggler-icon"></span>
 	    </button>
 	    <div class="collapse navbar-collapse" id="navbarMenu">
-	        <span class="navbar-nav ml-auto" style="font-size:1.5rem; font-weight:bold; color:white">NEW ROOM ADD</span>
+	        <span class="navbar-nav ml-auto" style="font-size:1.5rem; font-weight:bold; color:white">ROOM UPDATE</span>
 	        <ul class="navbar-nav ml-auto">
 	            <li class="nav-item">
 	                <a href="./room_page.jsp" class="nav-link custom-button2">Back</a>
@@ -41,45 +65,27 @@
 <section id="#">
 <div class="container">
 	<div class="jumbotron">
-		<form action="/cloud9_hrb/add_room" method="post">
+		<form action="/cloud9_hrb/update_room" method="post">
 		  <div class="row mb-3">
 		    <label for="inputEmail3" class="col-sm-2 col-form-label">Room ID</label>
 		    <div class="col-sm-10">
-		      <input type="text" class="form-control" id="inputEmail3" name="room_id" required>
+		      <input type="text" class="form-control" id="inputEmail3" value="<%=room_id %>" name="room_id" readOnly>
 		    </div>
 		  </div>
 		  
 		  <div class="row mb-3">
 		    <label for="inputEmail3" class="col-sm-2 col-form-label">Hotel ID</label>
 		    <div class="col-sm-10">
-		        <select class="form-select" aria-label="Default select example" name="hotel_id" >
-				  <option selected>-- SELECT --</option>
-				  <%
-				  	try{
-				  		Connection con = SingletonConnection.getSingletonConnection();
-		    			PreparedStatement psmt;	
-		    			String query = "SELECT HOTEL_ID FROM HRB_HOTEL";
-		    			psmt = con.prepareStatement(query);
-		    			ResultSet rs = psmt.executeQuery();
-		    			while(rs.next()){
-		    				%>
-		    				<option value="<%=rs.getString("hotel_id")%>"><%=rs.getString("hotel_id") %></option>
-		    				<%
-		    			}
-				  	}catch(Exception e){
-				  		out.println(e);
-				  	}
-		    			
-		    	  %>
-				</select>
+		      <input type="text" class="form-control" id="inputEmail3" value="<%=hotel_id %>" name="hotel_id" readOnly>
 		    </div>
 		  </div>
+		  
 		  
 		  <div class="row mb-3">
 		    <label for="inputEmail3" class="col-sm-2 col-form-label">A/C</label>
 		    <div class="col-sm-10">
 		        <select class="form-select" aria-label="Default select example" name="ac">
-				  <option selected>-- SELECT --</option>
+				  <option value="<%=ac %>" selected><%=ac %></option>
 				  <option value="yes">Yes</option>
 				  <option value="no">No</option>
 				</select>
@@ -90,7 +96,7 @@
 		    <label for="inputEmail3" class="col-sm-2 col-form-label">WiFi</label>
 		    <div class="col-sm-10">
 		        <select class="form-select" aria-label="Default select example" name="wifi">
-				  <option selected>-- SELECT --</option>
+				  <option value="<%=wifi %>" selected><%=wifi %></option>
 				  <option value="yes">Yes</option>
 				  <option value="no">No</option>
 				</select>
@@ -101,7 +107,7 @@
 		    <label for="inputEmail3" class="col-sm-2 col-form-label">Room Type</label>
 		    <div class="col-sm-10">
 		        <select class="form-select" aria-label="Default select example" name="room_type">
-				  <option selected>-- SELECT --</option>
+				  <option value="<%=room_type %>" selected><%=room_type %></option>
 				  <option value="single">Single</option>
 				  <option value="double">Double</option>
 				  <option value="deluxe">Deluxe</option>
@@ -113,13 +119,13 @@
 		    <label for="inputEmail3" class="col-sm-2 col-form-label">Available</label>
 		    <div class="col-sm-10">
 		        <select class="form-select" aria-label="Default select example" name="available">
-				  <option selected>-- SELECT --</option>
+				  <option value="<%=available %>" selected><%=available %></option>
 				  <option value="yes">Yes</option>
 				  <option value="no">No</option>
 				</select>
 		    </div>
 		  </div>		  
-		  <button type="submit" class="btn btn-primary">ADD ROOM</button>
+		  <button type="submit" class="btn btn-primary">UPDATE ROOM</button>
 		</form>	
 	</div>
 </div>

@@ -43,17 +43,17 @@
 	<div class="container">
 		<div class="jumbotron img-jmbo">
 			<h1>ADD ROOMS</h1>
-			<a href="#" class="nav-link custom-button1">GO</a>
+			<a href="./room_add_page.jsp" class="nav-link custom-button1">GO</a>
 		</div>
 		<div class="jumbotron img-jmbo">
 			<h1>UPDATE ROOMS</h1>
-			<a href="#" class="nav-link custom-button1">GO</a>
+			<a href="./hotel_room_update_page1.jsp" class="nav-link custom-button1">GO</a>
 		</div>
 	</div>
 	<div class="container">
 		<div class="jumbotron img-jmbo">
 			<h1>DELETE ROOMS</h1>
-			<a href="#" class="nav-link custom-button1">GO</a>
+			<a href="./hotel_room_delete_page1.jsp" class="nav-link custom-button1">GO</a>
 		</div>
 	</div>
 	</div>
