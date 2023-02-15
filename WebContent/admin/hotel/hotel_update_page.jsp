@@ -18,7 +18,7 @@
 	if(rs.next()){
 		hotel_name = rs.getString("HOTEL_NAME");
 		hotel_room_type = rs.getString("HOTEL_ROOM_TYPE");
-		hotel_addr = rs.getString("HOTEL_ADDR");
+		hotel_addr = rs.getString("ADDR");
 		room_price1 = rs.getDouble("SINGLE_ROOM_PRICE");
 		room_price2 = rs.getDouble("DOUBLE_ROOM_PRICE");
 		room_price3 = rs.getDouble("DELUXE_ROOM_PRICE");

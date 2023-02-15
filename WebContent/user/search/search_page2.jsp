@@ -1,16 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-<%@ page import="java.sql.*" import="java.util.ArrayList" import="user.search.searchClass.HotelSearchResult"%>  
+<%@ page import="java.sql.*" import="com.connection.SingletonConnection"%> 
+<%@ page import="java.util.ArrayList" import="user.search.searchClass.HotelSearchResult" %> 
 <%
-	ArrayList<HotelSearchResult> rs = (ArrayList<HotelSearchResult>) session.getAttribute("hotelSearchResult");
-	session.setAttribute("hotelSearchResult", rs);
 	String uname = (String)session.getAttribute("uname");
 	String name = (String)session.getAttribute("name");
-	int size = (int)session.getAttribute("size");
 	session.setAttribute("uname", uname);
 	session.setAttribute("name", name);
-	System.out.println("search_page1 - "+name+" "+size);
-	
+	System.out.println("search_page2 - "+name);
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -41,10 +38,10 @@
 	        <span class="navbar-toggler-icon"></span>
 	    </button>
 	    <div class="collapse navbar-collapse" id="navbarMenu">
-	        <span class="navbar-nav ml-auto" style="font-size:1.5rem; font-weight:bold; color:white">HOTEL SEARCH RESULT</span>
+	        <span class="navbar-nav ml-auto" style="font-size:1.5rem; font-weight:bold; color:white">ROOM SEARCH RESULT</span>
 	        <ul class="navbar-nav ml-auto">
 	            <li class="nav-item">
-	                <a href="../user_login_success.jsp" class="nav-link custom-button2">Back</a>
+	                <a href="./search_page1.jsp" class="nav-link custom-button2">Back</a>
 	            </li>
 	        </ul>
 	    </div>
@@ -56,40 +53,42 @@
 	  <table class="table table-dark">
 		  <thead>
 		    <tr>
-		      <th scope="col">HOTEL_NAME</th>
-		      <th scope="col">RATING</th>
-		      <th scope="col">LOCATION</th>
-		      <th scope="col">ROOMS</th>
-		      <th scope="col">SI-ROOM PRICE</th>
-		      <th scope="col">DO-ROOM PRICE</th>
-		      <th scope="col">SE-ROOM PRICE</th>
+		      <th scope="col">ROOM_ID</th>
+		      <th scope="col">A/C</th>
+		      <th scope="col">WIFI</th>
+		      <th scope="col">ROOM_TYPE</th>
+		      <th scope="col">AVAILABLE</th>
 		    </tr>
 		  </thead>
 		  <tbody>
-		    <%
-		    if(size>0){
-			  for(HotelSearchResult it: rs)
-			  {
-			  %>
-			    <tr>
-			      <td><%=it.getHotel_name() %></td>
-			      <td><%=it.getHotel_type() %></td>
-			      <td><%=it.getAddr() %></td>
-			      <td><%=it.getHotel_room_type() %></td>
-			      <td><%=it.getSingle_room_price() %></td>
-			      <td><%=it.getDouble_room_price() %></td>
-			      <td><%=it.getDeluxe_room_price() %></td>
-			      <td><a href="./search_page2.jsp?val=<%=it.getHotel_id() %>" class="btn btn-success btn-cus">GO</a></td>
-			    </tr>
-			   <%
-			  }
-		    }
-		    else{
-		    	%>
-		    	  <tr><h2>SORRY NO DATA FOUND</h2></tr>
-		    	<%
-		    }
-			%>
+		  		<%
+				  	try{
+				  		Connection con = SingletonConnection.getSingletonConnection();
+		    			PreparedStatement psmt;	
+		    			String hotel_id = request.getParameter("val");
+		    			String avail = "yes";
+		    			String query = "SELECT * FROM HRB_ROOM WHERE HOTEL_ID=? AND AVAILABLE=?";
+		    			psmt = con.prepareStatement(query);
+		    			psmt.setString(1, hotel_id);
+		    			psmt.setString(2, avail);
+		    			ResultSet rs = psmt.executeQuery();
+		    			while(rs.next()){
+		    				%>
+		    				<tr>
+						      <td><%=rs.getString("ROOM_ID") %></td>
+						      <td><%=rs.getString("AC") %></td>
+						      <td><%=rs.getString("WIFI") %></td>
+						      <td><%=rs.getString("ROOM_TYPE") %></td>
+						      <td><%=rs.getString("AVAILABLE") %></td>
+						      <td><a href="../booking/booking_entry_page.jsp?val=<%=rs.getString("ROOM_ID") %>" class="btn btn-success btn-cus">GO</a></td>
+						    </tr>
+		    				<%
+		    			}
+				  	}catch(Exception e){
+				  		out.println(e);
+				  	}
+		    			
+		    	  %>
 		  </tbody>
 		</table>
 	</div>

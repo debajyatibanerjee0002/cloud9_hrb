@@ -78,8 +78,17 @@
 				  <input type="date" class="form-control" id="floatingInput">
 				</div>
 				<div class="form-floating mb-3">
-				  <label for="floatingInput" class="text-white">Place</label>
-				  <input type="text" class="form-control" id="floatingInput">
+				  	<label for="floatingInput" class="text-white">Place</label>
+				    <div class="">
+				        <select class="form-control" id="floatingInput" name="place">
+						  <option selected>-- SELECT --</option>
+						  <option value="kolkata">KOLKATA</option>
+						  <option value="mumbai">MUMBAI</option>
+						  <option value="delhi">DELHI</option>
+						  <option value="goa">GOA</option>
+						  <option value="puri">PURI</option>
+						</select>
+				    </div>
 				</div>
 				<div class="form-floating mb-3">
 				  	<label for="floatingInput" class="text-white">Type</label>

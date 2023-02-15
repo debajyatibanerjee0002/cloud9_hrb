@@ -96,8 +96,7 @@
 		    			}
 				  	}catch(Exception e){
 				  		out.println(e);
-				  	}
-		    			
+				  	}		    			
 		    	  %>
 				</select>
 		    </div>

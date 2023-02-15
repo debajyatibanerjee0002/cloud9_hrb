@@ -50,12 +50,13 @@ public class SignupProcessUser extends HttpServlet {
 				HttpSession session = request.getSession();
 				session.setAttribute("uname", user_id);
 				session.setAttribute("fname", fname);
+				session.setAttribute("lname", lname);
 				response.sendRedirect("./user/user_login_success.jsp");
 			}
 			else{
 				response.sendRedirect("./user/user_login_error.jsp");
 			}
-			
+			conn.close();
 		}catch(Exception e){
 			out.print(e);
 		}

@@ -1,8 +1,10 @@
 <%
 	String uname = (String)session.getAttribute("uname");
 	String fname = (String)session.getAttribute("fname"); 
-	session.setAttribute(uname, "uname");
-	session.setAttribute(fname, "fname");
+	String lname = (String)session.getAttribute("lname"); 
+	session.setAttribute("uname", uname);
+	String name = fname+" "+lname;
+	session.setAttribute("name", name);
 %>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
@@ -39,7 +41,7 @@
 	        <span class="navbar-toggler-icon"></span>
 	    </button>
 	    <div class="collapse navbar-collapse" id="navbarMenu">
-	    <span class="navbar-nav ml-auto" style="font-size:1.5rem; font-weight:bold; color:white"><%=fname %></span>
+	    <!--<span class="navbar-nav ml-auto" style="font-size:1.5rem; font-weight:bold; color:white"><%=name %></span>-->
 	        <ul class="navbar-nav ml-auto">
 	            <li class="nav-item">
 	                <a href="#home" class="nav-link">Home</a>
@@ -63,30 +65,40 @@
 <section id="home">	
 	<div class="jumbotron img-jumbo banner-area">
 		<div class="container">
+			<h1 class="text-white"><span class="logoText"><%=name %>,</span></h1>
 			<h1 class="text-white">Welcome to <span class="logoText">Cloud9</span></h1>
 			<h3 class="text-white">Hotel & Resort Booking</h3>
 		</div>
 		<div class="container-fluid">
-			<form action="user/user_login.jsp" method="post">
+			<form action="/cloud9_hrb/user_search" method="post">
 				<div class="mb-3">
 				  <label for="floatingInput" class="text-white">From Date</label>
-				  <input type="date" class="form-control" id="floatingInput">
+				  <input type="date" class="form-control" id="floatingInput" name="from_date" required>
 				</div>
 				<div class="mb-3">
 				  <label for="floatingInput" class="text-white">To Date</label>
-				  <input type="date" class="form-control" id="floatingInput">
+				  <input type="date" class="form-control" id="floatingInput" name="to_date" required>
 				</div>
 				<div class="form-floating mb-3">
-				  <label for="floatingInput" class="text-white">Place</label>
-				  <input type="text" class="form-control" id="floatingInput">
+				  	<label for="floatingInput" class="text-white">Place</label>
+				    <div class="">
+				        <select class="form-control" id="floatingInput" name="place">
+						  <option selected>-- SELECT --</option>
+						  <option value="kolkata">KOLKATA</option>
+						  <option value="mumbai">MUMBAI</option>
+						  <option value="delhi">DELHI</option>
+						  <option value="goa">GOA</option>
+						  <option value="puri">PURI</option>
+						</select>
+				    </div>
 				</div>
 				<div class="form-floating mb-3">
 				  	<label for="floatingInput" class="text-white">Type</label>
 				    <div class="">
-				        <select class="form-control" id="floatingInput" name="hotel_resort">
+				        <select class="form-control" id="floatingInput" name="type">
 						  <option selected>-- SELECT --</option>
-						  <option value="hotel">Hotel</option>
-						  <option value="resort">Resort</option>
+						  <option value="HOTEL">Hotel</option>
+						  <option value="RESORT">Resort</option>
 						</select>
 				    </div>
 				</div>

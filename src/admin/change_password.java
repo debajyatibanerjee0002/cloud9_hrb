@@ -42,7 +42,7 @@ public class change_password extends HttpServlet {
 			else{
 				response.sendRedirect("./admin/change_password/password_change_page1.jsp");
 			}
-			
+			conn.close();
 		}catch(Exception e){
 			out.print(e);
 		}

@@ -53,7 +53,7 @@ public class add_resort extends HttpServlet {
 			else{
 				response.sendRedirect("./admin/resort/resort_add_page.jsp");
 			}
-			
+			conn.close();
 		}catch(Exception e){
 			out.print(e);
 		}

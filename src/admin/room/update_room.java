@@ -49,7 +49,7 @@ public class update_room extends HttpServlet {
 			else{
 				response.sendRedirect("./admin/room/hotel_room_update_page3.jsp");
 			}
-			
+			conn.close();
 		}catch(Exception e){
 			out.print(e);
 		}

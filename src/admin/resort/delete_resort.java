@@ -41,6 +41,7 @@ public class delete_resort extends HttpServlet {
 			else{
 				response.sendRedirect("./admin/resort/resort_delete_page.jsp");
 			}
+			conn.close();
 			
 		}catch(Exception e){
 			out.print(e);

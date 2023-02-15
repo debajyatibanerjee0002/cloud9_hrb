@@ -30,6 +30,10 @@ public class delete_hotel extends HttpServlet {
 			conn = SingletonConnection.getSingletonConnection();
 			String hotel_id = request.getParameter("hotel_id");
 			
+			String queryForRoom = "DELETE FROM HRB_ROOM WHERE HOTEL_ID=?";
+			psmt = conn.prepareStatement(queryForRoom);
+			psmt.setString(1, hotel_id);
+			psmt.executeUpdate();
 			
 			String query = "DELETE FROM HRB_HOTEL WHERE HOTEL_ID=?";
 			psmt = conn.prepareStatement(query);
@@ -41,6 +45,7 @@ public class delete_hotel extends HttpServlet {
 			else{
 				response.sendRedirect("./admin/hotel/hotel_delete_page.jsp");
 			}
+			conn.close();
 			
 		}catch(Exception e){
 			out.print(e);

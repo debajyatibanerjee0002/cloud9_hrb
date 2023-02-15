@@ -16,7 +16,7 @@
 	if(rs.next()){
 		resort_name = rs.getString("RESORT_NAME");
 		resort_type = rs.getInt("RESORT_TYPE");
-		resort_addr = rs.getString("RESORT_ADDR");
+		resort_addr = rs.getString("ADDR");
 		resort_price = rs.getDouble("RESORT_PRICE");
 		total_rooms = rs.getInt("TOTAL_ROOMS");
 	}

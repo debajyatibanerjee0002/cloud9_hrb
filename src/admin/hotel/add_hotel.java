@@ -58,6 +58,7 @@ public class add_hotel extends HttpServlet {
 			else{
 				response.sendRedirect("./admin/hotel/hotel_add_page.jsp");
 			}
+			conn.close();
 			
 		}catch(Exception e){
 			out.print(e);

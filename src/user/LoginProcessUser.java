@@ -39,15 +39,18 @@ public class LoginProcessUser extends HttpServlet {
 			ResultSet rs = psmt.executeQuery();
 			if(rs.next()){
 				String fname = rs.getString("USER_FNAME");
+				String lname = rs.getString("USER_LNAME");
 				HttpSession session = request.getSession();
 				session.setAttribute("uname", uname);
 				session.setAttribute("fname", fname);
+				session.setAttribute("lname", lname);
 				response.sendRedirect("user/user_login_success.jsp");
 			}else{
 				response.sendRedirect("user/user_login_error.jsp");
 //				RequestDispatcher requestDispatcher = request.getRequestDispatcher("admin/admin_login_error.jsp");
 //				requestDispatcher.include(request, response);
 			}
+			conn.close();
 		}catch(Exception e){
 			out.print(e);
 		}

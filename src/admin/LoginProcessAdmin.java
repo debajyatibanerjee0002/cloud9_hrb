@@ -46,6 +46,7 @@ public class LoginProcessAdmin extends HttpServlet {
 				RequestDispatcher requestDispatcher = request.getRequestDispatcher("admin/admin_login_error.jsp");
 				requestDispatcher.include(request, response);
 			}
+			conn.close();
 		}catch(Exception e){
 			out.print(e);
 		}

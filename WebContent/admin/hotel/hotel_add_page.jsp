@@ -65,7 +65,6 @@
 				  <option value="delhi">DELHI</option>
 				  <option value="goa">GOA</option>
 				  <option value="puri">PURI</option>
-				  <option value="other">OTHER</option>
 				</select>
 		    </div>
 		  </div>
