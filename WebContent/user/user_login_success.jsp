@@ -1,9 +1,15 @@
+<%
+	String uname = (String)session.getAttribute("uname");
+	String fname = (String)session.getAttribute("fname"); 
+	session.setAttribute(uname, "uname");
+	session.setAttribute(fname, "fname");
+%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<title>Welcome Page</title>
+<title>User Welcome Page</title>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
     crossorigin="anonymous">
@@ -13,30 +19,27 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Righteous&display=swap" rel="stylesheet">
 
-<link href="fontawesome/css/fontawesome.css" rel="stylesheet">
-<link href="fontawesome/css/brands.css" rel="stylesheet">
-<link href="fontawesome/css/solid.css" rel="stylesheet">
+<link href="../fontawesome/css/fontawesome.css" rel="stylesheet">
+<link href="../fontawesome/css/brands.css" rel="stylesheet">
+<link href="../fontawesome/css/solid.css" rel="stylesheet">
 
-<link href="styles/welcome_page.css" rel="stylesheet">
+<link href="../styles/welcome_page.css" rel="stylesheet">
 
 
 </head>
 
 <body>
 <section>
-	<div id="preloader"></div>
-</section>
-
-<section>
 	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
 	    <a href="#" class="navbar-brand logoText" >
-		    <img src="images/CLOUD9.png" alt="Bootstrap" width="50" height="50">
+		    <img src="../images/CLOUD9.png" alt="Bootstrap" width="50" height="50">
 		    Cloud9
 	    </a>
 	    <button class="navbar-toggler" data-toggle="collapse" data-target="#navbarMenu">
 	        <span class="navbar-toggler-icon"></span>
 	    </button>
 	    <div class="collapse navbar-collapse" id="navbarMenu">
+	    <span class="navbar-nav ml-auto" style="font-size:1.5rem; font-weight:bold; color:white"><%=fname %></span>
 	        <ul class="navbar-nav ml-auto">
 	            <li class="nav-item">
 	                <a href="#home" class="nav-link">Home</a>
@@ -47,16 +50,12 @@
 	            <li class="nav-item">
 	                <a href="#contact_us" class="nav-link">Contact Us</a>
 	            </li>
-	            <li class="nav-item dropdown">
-		          <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
-		            Log In
-		          </a>
-		          <ul class="dropdown-menu">
-		            <li><a class="dropdown-item" href="admin/admin_login.jsp">Admin</a></li>
-		            <li><hr class="dropdown-divider"></li>
-		            <li><a class="dropdown-item" href="user/user_login.jsp">User</a></li>
-		          </ul>
-		        </li>
+	            <li class="nav-item">
+	                <a href="#" class="nav-link custom-button2">BOOKING</a>
+	            </li>
+	            <li class="nav-item">
+	                <a href="../logout/logout.jsp" class="nav-link custom-button">LOG OUT</a>
+	            </li>
 	        </ul>
 	    </div>
 	</nav>
@@ -95,7 +94,7 @@
 			</form>			
 		</div>
 		<div class="container">
-			<img src="images/CLOUD9.png" alt="Bootstrap" width="70%">
+			<img src="../images/CLOUD9.png" alt="Bootstrap" width="70%">
 		</div>
 	</div>
 </section>
@@ -107,7 +106,7 @@
 		</div>
 		<div class="card-container">
 			<div class="card reveal" style="width: 18rem;">
-			  <img src="images/single_room.jpg" class="card-img-top" alt="...">
+			  <img src="../images/single_room.jpg" class="card-img-top" alt="...">
 			  <div class="card-body">
 			    <h5 class="card-title">Single Room</h5>
 			    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
@@ -115,7 +114,7 @@
 			  </div>
 			</div>
 			<div class="card reveal" style="width: 18rem;">
-			  <img src="images/sea_side_room.jpg" class="card-img-top" alt="...">
+			  <img src="../images/sea_side_room.jpg" class="card-img-top" alt="...">
 			  <div class="card-body">
 			    <h5 class="card-title">Sea View</h5>
 			    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
@@ -123,7 +122,7 @@
 			  </div>
 			</div>
 			<div class="card reveal" style="width: 18rem;">
-			  <img src="images/double_room.jpg" class="card-img-top" alt="...">
+			  <img src="../images/double_room.jpg" class="card-img-top" alt="...">
 			  <div class="card-body">
 			    <h5 class="card-title">Double Room</h5>
 			    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
@@ -131,7 +130,7 @@
 			  </div>
 			</div>
 			<div class="card reveal" style="width: 18rem;">
-			  <img src="images/hill_side_room.jpg" class="card-img-top" alt="...">
+			  <img src="../images/hill_side_room.jpg" class="card-img-top" alt="...">
 			  <div class="card-body">
 			    <h5 class="card-title">Hill View</h5>
 			    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
@@ -139,7 +138,7 @@
 			  </div>
 			</div>
 			<div class="card reveal" style="width: 18rem;">
-			  <img src="images/deluxe_room.jpg" class="card-img-top" alt="...">
+			  <img src="../images/deluxe_room.jpg" class="card-img-top" alt="...">
 			  <div class="card-body">
 			    <h5 class="card-title">Deluxe Room</h5>
 			    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
@@ -161,7 +160,7 @@
 					<div class="card mb-3" style="max-width: 540px;">
 					  <div class="row g-0">
 					    <div class="col-md-4">
-					      <img src="images/tea_coffee.jpg" class="img-fluid rounded-start" alt="...">
+					      <img src="../images/tea_coffee.jpg" class="img-fluid rounded-start" alt="...">
 					    </div>
 					    <div class="col-md-8">
 					      <div class="card-body">
@@ -174,7 +173,7 @@
 					<div class="card mb-3" style="max-width: 540px;">
 					  <div class="row g-0">
 					    <div class="col-md-4">
-					      <img src="images/hot_shower.jpg" class="img-fluid rounded-start" alt="...">
+					      <img src="../images/hot_shower.jpg" class="img-fluid rounded-start" alt="...">
 					    </div>
 					    <div class="col-md-8">
 					      <div class="card-body">
@@ -189,7 +188,7 @@
 					<div class="card mb-3" style="max-width: 540px;">
 					  <div class="row g-0">
 					    <div class="col-md-4">
-					      <img src="images/laundry.jpg" class="img-fluid rounded-start" alt="...">
+					      <img src="../images/laundry.jpg" class="img-fluid rounded-start" alt="...">
 					    </div>
 					    <div class="col-md-8">
 					      <div class="card-body">
@@ -202,7 +201,7 @@
 					<div class="card mb-3" style="max-width: 540px;">
 					  <div class="row g-0">
 					    <div class="col-md-4">
-					      <img src="images/ac.png" class="img-fluid rounded-start" alt="...">
+					      <img src="../images/ac.png" class="img-fluid rounded-start" alt="...">
 					    </div>
 					    <div class="col-md-8">
 					      <div class="card-body">
@@ -217,7 +216,7 @@
 					<div class="card mb-3" style="max-width: 540px;">
 					  <div class="row g-0">
 					    <div class="col-md-4">
-					      <img src="images/kitchen.jpg" class="img-fluid rounded-start" alt="...">
+					      <img src="../images/kitchen.jpg" class="img-fluid rounded-start" alt="...">
 					    </div>
 					    <div class="col-md-8">
 					      <div class="card-body">
@@ -230,7 +229,7 @@
 					<div class="card mb-3" style="max-width: 540px;">
 					  <div class="row g-0">
 					    <div class="col-md-4">
-					      <img src="images/wifi.jpg" class="img-fluid rounded-start" alt="...">
+					      <img src="../images/wifi.jpg" class="img-fluid rounded-start" alt="...">
 					    </div>
 					    <div class="col-md-8">
 					      <div class="card-body">

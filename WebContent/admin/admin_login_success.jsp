@@ -1,5 +1,6 @@
 <%
 	String uname = (String)session.getAttribute("uname");
+	session.setAttribute(uname, "uname");
 %>
 
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
@@ -69,7 +70,7 @@
 	<div class="container">
 		<div class="jumbotron img-jmbo">
 			<h1>CHANGE PASSWORD</h1>
-			<a href="#" class="nav-link custom-button1">GO</a>
+			<a href="./change_password/password_change_page1.jsp" class="nav-link custom-button1">GO</a>
 		</div>
 	</div>
 </div>

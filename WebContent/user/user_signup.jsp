@@ -12,25 +12,25 @@
     <div class="bg-img">
       <div class="content">
         <header>User SignUp</header>
-        <form action="#">
+        <form action="/cloud9_hrb/SignupProcessUser" method="post">
           <div class="field space">
-            <input type="text" required placeholder="First Name">
+            <input type="text" required placeholder="First Name" name="fname" required>
           </div>
           <div class="field space">
-            <input type="text" required placeholder="Last Name">
+            <input type="text" required placeholder="Last Name" name="lname" required>
           </div>
           <div class="field space">
-            <input type="email" required placeholder="Email">
+            <input type="email" required placeholder="Email" name="email" required>
           </div>
           <div class="field space">
-            <input type="password" class="pass-key" required placeholder="Password">
+            <input type="password" class="pass-key" placeholder="Password" name="password" required>
             <span class="show">SHOW</span>
           </div>
           <div class="field space">
-            <input type="text" required placeholder="Address">
+            <input type="text" required placeholder="Address" name="addr" required>
           </div>
           <div class="field space">
-            <input type="number" required placeholder="ZIP">
+            <input type="number" required placeholder="ZIP" name="zip" required>
           </div>
           <div class="signup-field space">
             <input type="submit" value="SIGN UP">

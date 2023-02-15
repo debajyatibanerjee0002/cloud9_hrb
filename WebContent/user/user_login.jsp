@@ -12,25 +12,25 @@
     <div class="bg-img">
       <div class="content">
         <header>User Login</header>
-        <form action="#">
+        <form action="/cloud9_hrb//LoginProcessUser">
           <div class="field">
             <span class="fa fa-user"></span>
-            <input type="email" required placeholder="Email">
+            <input type="email" required placeholder="Email" name="email" required>
           </div>
           <div class="field space">
             <span class="fa fa-lock"></span>
-            <input type="password" class="pass-key" required placeholder="Password">
+            <input type="password" class="pass-key" placeholder="Password" name="pass" required>
             <span class="show">SHOW</span>
           </div>
           <div class="pass">
             <a href="#">Forgot Password?</a>
           </div>
-          <div class="field">
+          <div class="signup-field">
             <input type="submit" value="LOGIN">
           </div>
         </form>
         <div class="signup">Don't have account?
-          <a href="#">Signup Now</a>
+          <a href="./user_signup.jsp">Signup Now</a>
         </div>
       </div>
     </div>

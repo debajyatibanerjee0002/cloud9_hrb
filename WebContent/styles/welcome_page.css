@@ -47,7 +47,7 @@ html{
     text-align: -webkit-center;
     position: relative;
     z-index: 1;
-    top: 510px;
+    top: 550px;
 }
 .card-container{
 	display: flex;
@@ -158,4 +158,42 @@ html{
 	transform: translateY(0px);
 	opacity: 1;
 	z-index: 2;
+}
+.custom-button{
+	border: 2px solid red;
+    border-radius: 10px;
+    font-weight: bold;
+    color: white !important;
+    text-align: center;
+    width: 6rem;
+    padding: 7px;
+}
+.custom-button1{
+	border: 2px solid #007bff;
+    border-radius: 10px;
+    font-weight: bold;
+    color: black !important;
+    text-align: center;
+    width: 6rem;
+    padding: 7px;
+}
+.custom-button2{
+	border: 2px solid #20c997;
+    border-radius: 10px;
+    font-weight: bold;
+    color: white !important;
+    text-align: center;
+    width: 6rem;
+    padding: 7px;
+    margin-right: 10px;
+}
+.custom-button:hover{
+	background-color: red;
+}
+.custom-button1:hover{
+	color: white !important;
+	background-color: #007bff;
+}
+.custom-button2:hover{
+	background-color: #20c997;
 }

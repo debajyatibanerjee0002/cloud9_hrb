@@ -27,12 +27,12 @@
           <div class="pass">
             <a href="#">Forgot Password?</a>
           </div>
-          <div class="field">
+          <div class="signup-field">
             <input type="submit" value="LOGIN">
           </div>
         </form>
         <div class="signup">Don't have account?
-          <a href="#">Signup Now</a>
+          <a href="./user_signup.jsp">Signup Now</a>
         </div>
       </div>
     </div>
