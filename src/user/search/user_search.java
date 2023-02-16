@@ -18,6 +18,7 @@ import javax.servlet.http.HttpSession;
 import com.connection.SingletonConnection;
 
 import user.search.searchClass.HotelSearchResult;
+import user.search.searchClass.ResortSearchResult;
 
 
 @WebServlet("/user_search")
@@ -29,6 +30,7 @@ public class user_search extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("text/html");
 		PrintWriter out = response.getWriter();
+		HttpSession session = request.getSession();
 		
 		Connection conn;
 		PreparedStatement psmt;
@@ -39,8 +41,9 @@ public class user_search extends HttpServlet {
 		try{
 			conn = SingletonConnection.getSingletonConnection();
 			
-			ArrayList<HotelSearchResult> hotelSearchResult = new ArrayList<HotelSearchResult>();
-			if(type.equals("HOTEL")){								
+			if(type.equals("HOTEL")){	
+				ArrayList<HotelSearchResult> hotelSearchResult = new ArrayList<HotelSearchResult>();
+				session.setAttribute("type", type);
 				String query = "SELECT * FROM HRB_HOTEL WHERE ADDR=?";
 				psmt = conn.prepareStatement(query);
 				psmt.setString(1, place);
@@ -59,23 +62,40 @@ public class user_search extends HttpServlet {
 					obj.setTo_date(to_date);
 					hotelSearchResult.add(obj);
 				}
-				HttpSession session = request.getSession();
+				
 				session.setAttribute("hotelSearchResult", hotelSearchResult);
 				session.setAttribute("from_date", from_date);
 				session.setAttribute("to_date", to_date);
 				int size = hotelSearchResult.size();
 				session.setAttribute("size", size);
 				response.sendRedirect("user/search/search_page1.jsp");
-				System.out.println(size);
-			}else{				
-				String query = "SELECT * FROM HRB_RESORT WHERE ADDR=?";
+//				System.out.println(size);
+			}else{	
+				String avail = "YES";
+				ArrayList<ResortSearchResult> resortSearchResult = new ArrayList<ResortSearchResult>();
+				session.setAttribute("type", type);
+				String query = "SELECT * FROM HRB_RESORT WHERE ADDR=? AND AVAILABLE=?";
 				psmt = conn.prepareStatement(query);
 				psmt.setString(1, place);
+				psmt.setString(2, avail);
 				ResultSet rs = psmt.executeQuery();
 				while(rs.next()){
-					HttpSession session = request.getSession();
-					response.sendRedirect("user/user_login_success.jsp");
+					ResortSearchResult obj = new ResortSearchResult();
+					obj.setResort_id(rs.getString("RESORT_ID"));
+					obj.setResort_name(rs.getString("RESORT_NAME"));
+					obj.setAddr(rs.getString("ADDR"));
+					obj.setResort_type(rs.getInt("RESORT_TYPE"));
+					obj.setTotal_rooms(rs.getInt("TOTAL_ROOMS"));
+					obj.setResort_price(rs.getDouble("RESORT_PRICE"));
+					obj.setAvailable(rs.getString("AVAILABLE"));
+					resortSearchResult.add(obj);
 				}
+				session.setAttribute("resortSearchResult", resortSearchResult);
+				session.setAttribute("from_date", from_date);
+				session.setAttribute("to_date", to_date);
+				int size = resortSearchResult.size();
+				session.setAttribute("size", size);
+				response.sendRedirect("user/search/search_page1.jsp");
 			}
 			
 			conn.close();

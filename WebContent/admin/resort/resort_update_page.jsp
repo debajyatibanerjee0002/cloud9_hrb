@@ -7,6 +7,7 @@
 	double resort_price=0.0;
 	int resort_type=1;
 	int total_rooms=0;
+	String available="";
 	Connection con = SingletonConnection.getSingletonConnection();
 	PreparedStatement psmt;
 	String query = "SELECT * FROM HRB_RESORT WHERE RESORT_ID=?";
@@ -19,6 +20,7 @@
 		resort_addr = rs.getString("ADDR");
 		resort_price = rs.getDouble("RESORT_PRICE");
 		total_rooms = rs.getInt("TOTAL_ROOMS");
+		available = rs.getString("AVAILABLE");
 	}
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -115,7 +117,17 @@
 		    <div class="col-sm-10">
 		      <input type="number" class="form-control" id="inputEmail3" value="<%=resort_price %>" name="resort_price" required>
 		    </div>
-		  </div>	  
+		  </div>	
+		  <div class="row mb-3">
+		    <label for="inputEmail3" class="col-sm-2 col-form-label">Available</label>
+		    <div class="col-sm-10">
+		        <select class="form-select" aria-label="Default select example" name="available" required>
+				  <option value="<%=available %>"><%=available %></option>
+				  <option value="YES">Yes</option>
+				  <option value="NO">No</option>
+				</select>
+		    </div>
+		  </div> 
 		  
 		  <button type="submit" class="btn btn-primary">UPDATE RESORT</button>
 		</form>	

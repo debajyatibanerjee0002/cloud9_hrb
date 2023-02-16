@@ -35,16 +35,18 @@ public class update_resort extends HttpServlet {
 			int resort_type = Integer.parseInt(request.getParameter("resort_type"));
 			int total_rooms = Integer.parseInt(request.getParameter("total_rooms"));
 			double resort_price = Double.valueOf(request.getParameter("resort_price"));
+			String available = request.getParameter("available");
 			
-			
-			String query = "UPDATE HRB_RESORT SET RESORT_NAME=?, ADDR=?, RESORT_TYPE=?, TOTAL_ROOMS=?, RESORT_PRICE=? WHERE RESORT_ID=?";
+			String query = "UPDATE HRB_RESORT SET RESORT_NAME=?, ADDR=?, RESORT_TYPE=?, TOTAL_ROOMS=?, RESORT_PRICE=?, AVAILABLE=? WHERE RESORT_ID=?";
 			psmt = conn.prepareStatement(query);
 			psmt.setString(1, resort_name);
 			psmt.setString(2, resort_addr);
 			psmt.setInt(3, resort_type);
 			psmt.setInt(4, total_rooms);
 			psmt.setDouble(5, resort_price);
-			psmt.setString(6, resort_id);
+			psmt.setString(6, available);
+			psmt.setString(7, resort_id);
+			
 			int rn = psmt.executeUpdate();
 			if(rn>0){
 				response.sendRedirect("./admin/resort/resort_page.jsp");

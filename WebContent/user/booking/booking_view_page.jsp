@@ -3,6 +3,7 @@
 	String uname = (String)session.getAttribute("uname");
 	session.setAttribute("room_id", room_id);
 	System.out.println(uname+" "+room_id);
+	String type = (String)session.getAttribute("type");
 %>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
@@ -81,8 +82,13 @@
 		    			psmt.setString(1, uname);
 		    			ResultSet rs = psmt.executeQuery();
 		    			while(rs.next()){
+		    				String hr_type = rs.getString("TYPE");
 		    				String s = rs.getString("BILL_NO");
-		    				s = s.substring(5);
+		    				if(hr_type.equals("HOTEL")){
+		    					s = s.substring(5);
+		    				}else{
+		    					s = s.substring(0, 6);
+		    				}		    				
 		    				System.out.println(s);
 		    				%>
 		    				
@@ -99,7 +105,7 @@
 						      <td><%=rs.getString("CHECK_OUT_DATE") %></td>
 						      <td><%=rs.getString("NO_OF_NIGHT") %></td>
 						      <td><%=rs.getString("TOTAL_AMOUNT") %></td>
-						      <td><a href="/cloud9_hrb/BookingDelete?val=<%=s %>&val2=<%=user %>&val3=<%=rs.getString("BILL_NO") %>" class="btn btn-danger btn-cus">DELETE</a></td>
+						      <td><a href="/cloud9_hrb/BookingDelete?val=<%=s %>&val2=<%=user %>&val3=<%=rs.getString("BILL_NO") %>&val4=<%=hr_type %>" class="btn btn-danger btn-cus">DELETE</a></td>
 						    </tr>
 		    				<%
 		    			}

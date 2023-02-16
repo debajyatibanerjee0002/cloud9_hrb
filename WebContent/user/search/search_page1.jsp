@@ -1,9 +1,19 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-<%@ page import="java.sql.*" import="java.util.ArrayList" import="user.search.searchClass.HotelSearchResult"%>  
+<%@ page import="java.sql.*" import="java.util.ArrayList"  %>
+<%@ page import="user.search.searchClass.HotelSearchResult"%>  
+<%@ page import="user.search.searchClass.ResortSearchResult"%>
 <%
-	ArrayList<HotelSearchResult> rs = (ArrayList<HotelSearchResult>) session.getAttribute("hotelSearchResult");
-	session.setAttribute("hotelSearchResult", rs);
+	String type = (String)session.getAttribute("type");
+	ArrayList<HotelSearchResult> rs1 = (ArrayList<HotelSearchResult>) session.getAttribute("hotelSearchResult");
+	ArrayList<ResortSearchResult> rs2 = (ArrayList<ResortSearchResult>) session.getAttribute("resortSearchResult");
+	if(type.equals("HOTEL")){
+		session.setAttribute("hotelSearchResult", rs1);
+	}else{
+		session.setAttribute("resortSearchResult", rs2);
+	}
+	
+	
 	String uname = (String)session.getAttribute("uname");
 	String name = (String)session.getAttribute("name");
 	String from_date = (String)session.getAttribute("from_date");
@@ -13,7 +23,7 @@
 	int size = (int)session.getAttribute("size");
 	session.setAttribute("uname", uname);
 	session.setAttribute("name", name);
-	System.out.println("search_page1 - "+name+" "+size+" "+from_date+" "+to_date);
+	System.out.println("search_page1 - "+name+" "+size+" "+from_date+" "+to_date+" "+type);
 	
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -57,7 +67,10 @@
 <section id="#">
 <div class="container">
 	<div class="jumbotron">
-	  <table class="table table-dark">
+	  <%
+	  	if(type.equals("HOTEL")){
+	  %>
+	  	<table class="table table-dark">
 		  <thead>
 		    <tr>
 		      <th scope="col">HOTEL_NAME</th>
@@ -72,7 +85,7 @@
 		  <tbody>
 		    <%
 		    if(size>0){
-			  for(HotelSearchResult it: rs)
+		    	for(HotelSearchResult it: rs1)
 			  {
 			  %>
 			    <tr>
@@ -83,7 +96,7 @@
 			      <td><%=it.getSingle_room_price() %></td>
 			      <td><%=it.getDouble_room_price() %></td>
 			      <td><%=it.getDeluxe_room_price() %></td>
-			      <td><a href="./search_page2.jsp?val=<%=it.getHotel_id() %>" class="btn btn-success btn-cus">GO</a></td>
+			      <td><a href="./search_page2.jsp?val=<%=it.getHotel_id() %>&val2=<%=type %>" class="btn btn-success btn-cus">GO</a></td>
 			    </tr>
 			   <%
 			  }
@@ -96,6 +109,49 @@
 			%>
 		  </tbody>
 		</table>
+	  <%
+	  	}else{
+	  %>
+	  		<table class="table table-dark">
+		  <thead>
+		    <tr>
+		      <th scope="col">RESORT_NAME</th>
+		      <th scope="col">RATING</th>
+		      <th scope="col">LOCATION</th>
+		      <th scope="col">ROOMS</th>
+		      <th scope="col">PRICE</th>
+		      <th scope="col">AVAILABLE</th>
+		    </tr>
+		  </thead>
+		  <tbody>
+		    <%
+		    if(size>0){
+			  for(ResortSearchResult it: rs2)
+			  {
+			  %>
+			    <tr>
+			      <td><%=it.getResort_name() %></td>
+			      <td><%=it.getResort_type() %></td>
+			      <td><%=it.getAddr() %></td>
+			      <td><%=it.getTotal_rooms() %></td>			      
+			      <td><%=it.getResort_price() %></td>
+			      <td><%=it.getAvailable() %></td>
+			      <td><a href="../booking/booking_entry_page.jsp?val=<%=it.getResort_id() %>&val2=<%=type %>" class="btn btn-success btn-cus">GO</a></td>
+			    </tr>
+			   <%
+			  }
+		    }
+		    else{
+		    	%>
+		    	  <tr><h2>SORRY NO DATA FOUND</h2></tr>
+		    	<%
+		    }
+			%>
+		  </tbody>
+		</table>
+	  <%
+	  	}
+	  %>
 	</div>
 </div>
 </section>

@@ -3,6 +3,8 @@
 <%@ page import="java.sql.*" import="com.connection.SingletonConnection"%> 
 <%@ page import="java.util.ArrayList" import="user.search.searchClass.HotelSearchResult" %> 
 <%
+	String type = request.getParameter("val2");
+
 	String uname = (String)session.getAttribute("uname");
 	String name = (String)session.getAttribute("name");
 	String from_date = (String)session.getAttribute("from_date");
@@ -11,7 +13,7 @@
 	session.setAttribute("to_date", to_date);
 	session.setAttribute("uname", uname);
 	session.setAttribute("name", name);
-	System.out.println("search_page2 - "+name+" "+from_date+" "+to_date);
+	System.out.println("search_page2 - "+name+" "+from_date+" "+to_date+" "+type);
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -84,7 +86,7 @@
 						      <td><%=rs.getString("WIFI") %></td>
 						      <td><%=rs.getString("ROOM_TYPE") %></td>
 						      <td><%=rs.getString("AVAILABLE") %></td>
-						      <td><a href="../booking/booking_entry_page.jsp?val=<%=rs.getString("ROOM_ID") %>" class="btn btn-success btn-cus">GO</a></td>
+						      <td><a href="../booking/booking_entry_page.jsp?val=<%=rs.getString("ROOM_ID") %>&val2=<%=type %>" class="btn btn-success btn-cus">GO</a></td>
 						    </tr>
 		    				<%
 		    			}

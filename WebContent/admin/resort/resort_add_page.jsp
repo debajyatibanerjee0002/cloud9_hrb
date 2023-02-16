@@ -94,7 +94,18 @@
 		    <div class="col-sm-10">
 		      <input type="number" class="form-control" id="inputEmail3" name="resort_price" required>
 		    </div>
-		  </div>	  
+		  </div>	
+		  
+		  <div class="row mb-3">
+		    <label for="inputEmail3" class="col-sm-2 col-form-label">Available</label>
+		    <div class="col-sm-10">
+		        <select class="form-select" aria-label="Default select example" name="available" required>
+				  <option selected>-- SELECT --</option>
+				  <option value="YES">Yes</option>
+				  <option value="NO">No</option>
+				</select>
+		    </div>
+		  </div>  
 		  
 		  <button type="submit" class="btn btn-primary">ADD RESORT</button>
 		</form>	

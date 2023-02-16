@@ -78,7 +78,12 @@
 		    			ResultSet rs = psmt.executeQuery();
 		    			while(rs.next()){
 		    				String s = rs.getString("BILL_NO");
-		    				s = s.substring(5);
+		    				String hr_type = rs.getString("TYPE");
+		    				if(hr_type.equals("HOTEL")){
+		    					s = s.substring(5);
+		    				}else{
+		    					s = s.substring(0, 6);
+		    				}		 
 		    				System.out.println(s);
 		    				%>
 		    				<tr>
@@ -94,7 +99,7 @@
 						      <td><%=rs.getString("CHECK_OUT_DATE") %></td>
 						      <td><%=rs.getString("NO_OF_NIGHT") %></td>
 						      <td><%=rs.getString("TOTAL_AMOUNT") %></td>
-						      <td><a href="/cloud9_hrb/BookingDelete?val=<%=s %>&val2=<%=user %>&val3=<%=rs.getString("BILL_NO") %>" class="btn btn-danger btn-cus">DELETE</a></td>
+						      <td><a href="/cloud9_hrb/BookingDelete?val=<%=s %>&val2=<%=user %>&val3=<%=rs.getString("BILL_NO") %>&val4=<%=hr_type %>" class="btn btn-danger btn-cus">DELETE</a></td>
 						    </tr>
 		    				<%
 		    			}

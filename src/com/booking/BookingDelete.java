@@ -29,17 +29,29 @@ public class BookingDelete extends HttpServlet {
 		PreparedStatement psmt;
 		try{
 			conn = SingletonConnection.getSingletonConnection();
-			String room_id = request.getParameter("val");
+			String id = request.getParameter("val");
 			String admin_user = request.getParameter("val2");
 			String bill_no = request.getParameter("val3");
+			String type = request.getParameter("val4");
 			HttpSession session = request.getSession();
-			session.setAttribute("room_id", room_id);
+			session.setAttribute("room_id", id);
 			
-			String query = "UPDATE HRB_ROOM SET AVAILABLE=? WHERE ROOM_ID=?";
-			psmt = conn.prepareStatement(query);
-			psmt.setString(1, "YES");
-			psmt.setString(2, room_id);
-			int rn = psmt.executeUpdate();
+			String query = "";
+			int rn = 0;
+			if(type.equals("HOTEL")){
+				query = "UPDATE HRB_ROOM SET AVAILABLE=? WHERE ROOM_ID=?";
+				psmt = conn.prepareStatement(query);
+				psmt.setString(1, "YES");
+				psmt.setString(2, id);
+				rn = psmt.executeUpdate();
+			}
+			else{
+				query = "UPDATE HRB_RESORT SET AVAILABLE=? WHERE RESORT_ID=?";
+				psmt = conn.prepareStatement(query);
+				psmt.setString(1, "YES");
+				psmt.setString(2, id);
+				rn = psmt.executeUpdate();
+			}
 			if(rn>0){
 				query = "DELETE FROM HRB_BOOKING WHERE BILL_NO=?";
 				psmt = conn.prepareStatement(query);
