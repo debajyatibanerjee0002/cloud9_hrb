@@ -14,14 +14,14 @@
       <h3>Invalid Email or Password</h3>
         <header>User Login</header>
         
-        <form action="#">
+        <form action="/cloud9_hrb/LoginProcessUser" method="post">
           <div class="field">
             <span class="fa fa-user"></span>
-            <input type="email" required placeholder="Email">
+            <input type="email" required placeholder="Email" name="email">
           </div>
           <div class="field space">
             <span class="fa fa-lock"></span>
-            <input type="password" class="pass-key" required placeholder="Password">
+            <input type="password" class="pass-key" required placeholder="Password" name="pass">
             <span class="show">SHOW</span>
           </div>
           <div class="pass">

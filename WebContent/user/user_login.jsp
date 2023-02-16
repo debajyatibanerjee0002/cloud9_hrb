@@ -12,7 +12,7 @@
     <div class="bg-img">
       <div class="content">
         <header>User Login</header>
-        <form action="/cloud9_hrb//LoginProcessUser">
+        <form action="/cloud9_hrb/LoginProcessUser">
           <div class="field">
             <span class="fa fa-user"></span>
             <input type="email" required placeholder="Email" name="email" required>
