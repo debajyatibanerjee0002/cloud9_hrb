@@ -61,7 +61,8 @@ public class user_search extends HttpServlet {
 				}
 				HttpSession session = request.getSession();
 				session.setAttribute("hotelSearchResult", hotelSearchResult);
-				
+				session.setAttribute("from_date", from_date);
+				session.setAttribute("to_date", to_date);
 				int size = hotelSearchResult.size();
 				session.setAttribute("size", size);
 				response.sendRedirect("user/search/search_page1.jsp");

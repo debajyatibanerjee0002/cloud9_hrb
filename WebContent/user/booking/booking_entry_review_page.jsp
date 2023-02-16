@@ -2,63 +2,30 @@
     pageEncoding="ISO-8859-1"%>
 <%@ page import="java.sql.*" import="com.connection.SingletonConnection"%>
 <%
-	String uname = (String)session.getAttribute("uname");
-	String name = (String)session.getAttribute("name");
-	String from_date = (String)session.getAttribute("from_date");
-	String to_date = (String)session.getAttribute("to_date");
-	session.setAttribute("from_date", from_date);
-	session.setAttribute("to_date", to_date);
-	session.setAttribute("uname", uname);
-	session.setAttribute("name", name);
-	String room_id = request.getParameter("val");
-	String room_type = "";
-	String hotel_id = "";
-	String hotel_name = "";
-	int max_capacity = 1;
-	double room_price = 0.0;
-	System.out.println("booking entry - "+name+" "+from_date+" "+to_date);
-	try{
-  		Connection con = SingletonConnection.getSingletonConnection();
-		PreparedStatement psmt;	
-		String query = "SELECT * FROM HRB_ROOM WHERE ROOM_ID=?";
-		psmt = con.prepareStatement(query);
-		psmt.setString(1, room_id);
-		ResultSet rs = psmt.executeQuery();
-		if(rs.next()){
-			room_type = rs.getString("ROOM_TYPE");
-			hotel_id = rs.getString("HOTEL_ID");
-		}
-		// Second query to get price from HRB_HOTEL table
-		double single_room_price = 0.0;
-		double double_room_price = 0.0;
-		double deluxe_room_price = 0.0;
-		query = "SELECT * FROM HRB_HOTEL WHERE HOTEL_ID=?";
-		psmt = con.prepareStatement(query);
-		psmt.setString(1, hotel_id);
-		rs = psmt.executeQuery();
-		if(rs.next()){
-			single_room_price = Double.valueOf(rs.getDouble("SINGLE_ROOM_PRICE"));
-			double_room_price = Double.valueOf(rs.getDouble("DOUBLE_ROOM_PRICE"));
-			deluxe_room_price = Double.valueOf(rs.getDouble("DELUXE_ROOM_PRICE"));
-			hotel_name = rs.getString("HOTEL_NAME");
-		}
-		if(room_type.equals("single")){
-			room_price = single_room_price;
-			max_capacity = 2;
-		}
-		else if(room_type.equals("double")){
-			room_price = double_room_price;
-			max_capacity = 3;
-		}
-		else if(room_type.equals("deluxe")){
-			room_price = deluxe_room_price;
-			max_capacity = 4;
-		}
-		con.close();
-  	}catch(Exception e){
-  		out.println(e);
-  	}
-	System.out.println("booking page - "+name+" "+room_id+" "+room_type+" "+hotel_id+" "+room_price);
+	String hotel_id = request.getParameter("hotel_id");
+	String room_id = request.getParameter("room_id");
+	String user_id = request.getParameter("user_id");
+	String room_type = request.getParameter("room_type");
+	String hotel_name = request.getParameter("hotel_name");
+	double room_price = Double.valueOf(request.getParameter("room_price"));
+	String user_name = request.getParameter("user_name");
+	int age = Integer.parseInt(request.getParameter("age"));
+	int no_of_guests = Integer.parseInt(request.getParameter("no_of_guests"));
+	String name_of_guests = request.getParameter("name_of_guests");
+	String from_date = request.getParameter("from_date");
+	String to_date = request.getParameter("to_date");
+	int no_of_nights = Integer.parseInt(request.getParameter("no_of_nights"));
+	
+	String bill_no = hotel_id+room_id;
+	double total = 0.0;
+	total = Double.valueOf(room_price*no_of_nights);
+	System.out.println(total);
+	if(total<7500.0){
+		total = total + ((total*12)/100);
+	}else{
+		total = total + ((total*15)/100);
+	}
+	//System.out.println("booking page - "+name+" "+room_id+" "+room_type+" "+hotel_id+" "+room_price);
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -88,10 +55,10 @@
 	        <span class="navbar-toggler-icon"></span>
 	    </button>
 	    <div class="collapse navbar-collapse" id="navbarMenu">
-	        <span class="navbar-nav ml-auto" style="font-size:1.5rem; font-weight:bold; color:white">BOOKING ENTRY</span>
+	        <span class="navbar-nav ml-auto" style="font-size:1.5rem; font-weight:bold; color:white">BOOKING REVIEW</span>
 	        <ul class="navbar-nav ml-auto">
 	            <li class="nav-item">
-	                <a href="../search/search_page1.jsp" class="nav-link custom-button2">Back</a>
+	                <a href="../search/search_page1.jsp" class="nav-link custom-button">Cancle</a>
 	            </li>
 	        </ul>
 	    </div>
@@ -100,10 +67,16 @@
 <section id="#">
 <div class="container">
 	<div class="jumbotron">
-		<form action="./booking_entry_review_page.jsp" method="POST">
+		<form action="/cloud9_hrb/Booking" method="POST">
 		<input type="hidden" class="form-control" id="inputEmail3" value="<%=hotel_id %>" name="hotel_id" required>
 		<input type="hidden" class="form-control" id="inputEmail3" value="<%=room_id %>" name="room_id" required>
 		<input type="hidden" class="form-control" id="inputEmail3" value="<%=room_price %>" name="room_price" required>
+			<div class="row mb-3">
+			  <label for="inputEmail3" class="col-sm-2 col-form-label">Bill No</label>
+			  <div class="col-sm-10">
+			    <input type="text" class="form-control" id="inputEmail3" name="bill_no" value="<%=bill_no %>" readonly>
+			  </div>
+			</div>
 			<div class="row mb-3">
 			  <label for="inputEmail3" class="col-sm-2 col-form-label">Hotel Name</label>
 			  <div class="col-sm-10">
@@ -113,7 +86,7 @@
 			<div class="row mb-3">
 			  <label for="inputEmail3" class="col-sm-2 col-form-label">User Id</label>
 			  <div class="col-sm-10">
-			    <input type="text" class="form-control" id="inputEmail3" name="user_id" value="<%=uname %>" readonly>
+			    <input type="text" class="form-control" id="inputEmail3" name="user_id" value="<%=user_id %>" readonly>
 			  </div>
 			</div>
 			<div class="row mb-3">
@@ -131,50 +104,53 @@
 			<div class="row mb-3">
 			  <label for="inputEmail3" class="col-sm-2 col-form-label" >User Name</label>
 			  <div class="col-sm-10">
-			    <input type="text" class="form-control" id="inputEmail3" name="user_name" value="<%=name %>" readonly>
+			    <input type="text" class="form-control" id="inputEmail3" name="user_name" value="<%=user_name %>" readonly>
 			  </div>
 			</div>  
 			<div class="row mb-3">
 			  <label for="inputEmail3" class="col-sm-2 col-form-label">Age</label>
 			  <div class="col-sm-10">
-			    <input type="number" class="form-control" id="inputEmail3" name="age" required>
+			    <input type="number" class="form-control" id="inputEmail3" name="age" value="<%=age %>" readonly>
 			  </div>
 			</div>  		  
 			<div class="row mb-3">
 			  <label for="inputEmail3" class="col-sm-2 col-form-label">No. of Guests</label>
 			  <div class="col-sm-10">
-			      <div class="slidecontainer">
-			  <input type="range" min="1" max="<%=max_capacity %>" value="1" class="slider" id="myRange" name="no_of_guests" required>
-			  <span id="number"></span>
-			</div>
+			    <input type="number" class="form-control" name="no_of_guests" value="<%=no_of_guests %>" readonly>
 			  </div>
 			</div>
 			<div class="row mb-3">
 			  <label for="inputEmail3" class="col-sm-2 col-form-label">Name of Guests</label>
 			  <div class="col-sm-10">
-			    <input type="text" class="form-control" id="inputEmail3" name="name_of_guests" required>
+			    <input type="text" class="form-control" id="inputEmail3" name="name_of_guests" value="<%=name_of_guests %>" readonly>
 			  </div>
 			</div>
 			
 			<div class="row mb-3">
 			  <label for="floatingInput" class="col-sm-2 col-form-label">From Date</label>
 			  <div class="col-sm-10">
-			    <input type="date" class="form-control" id="floatingInput" value="<%=from_date %>" name="from_date" required>
+			    <input type="date" class="form-control" id="floatingInput" name="from_date"  value="<%=from_date %>"readonly>
 			  </div>
 			</div>
 			<div class="row mb-3">
 			  <label for="floatingInput" class="col-sm-2 col-form-label">To Date</label>
 			  <div class="col-sm-10">
-			    <input type="date" class="form-control" id="floatingInput" value="<%=to_date %>" name="to_date" required>
+			    <input type="date" class="form-control" id="floatingInput" name="to_date" value="<%=to_date %>" readonly>
 			  </div>
 			</div>	
 			<div class="row mb-3">
 			  <label for="inputEmail3" class="col-sm-2 col-form-label">No. of Nights</label>
 			  <div class="col-sm-10">
-			    <input type="number" class="form-control" name="no_of_nights" required>
+			    <input type="number" class="form-control" name="no_of_nights" value="<%=no_of_nights %>" readonly>
 			  </div>
 			</div>
-			<button type="submit" class="btn btn-primary">GO TO REVIEW</button>
+			<div class="row mb-3">
+			  <label for="inputEmail3" class="col-sm-2 col-form-label">Total Amount + %GST</label>
+			  <div class="col-sm-10">
+			    <input type="number" class="form-control" name="total" value="<%=total %>" readonly>
+			  </div>
+			</div>
+			<button type="submit" class="btn btn-primary">BOOK</button>
 		</form>
 	</div>
 </div>

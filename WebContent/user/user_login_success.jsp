@@ -53,7 +53,7 @@
 	                <a href="#contact_us" class="nav-link">Contact Us</a>
 	            </li>
 	            <li class="nav-item">
-	                <a href="#" class="nav-link custom-button2">BOOKING</a>
+	                <a href="./booking/booking_view_page.jsp" class="nav-link custom-button2">BOOKING</a>
 	            </li>
 	            <li class="nav-item">
 	                <a href="../logout/logout.jsp" class="nav-link custom-button">LOG OUT</a>

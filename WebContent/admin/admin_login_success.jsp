@@ -64,7 +64,7 @@
 		</div>
 		<div class="jumbotron img-jmbo">
 			<h1>BOOKINGS</h1>
-			<a href="#" class="nav-link custom-button1">GO</a>
+			<a href="./booking/booking_view_page.jsp" class="nav-link custom-button1">GO</a>
 		</div>
 	</div>
 	<div class="container">

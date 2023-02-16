@@ -6,10 +6,14 @@
 	session.setAttribute("hotelSearchResult", rs);
 	String uname = (String)session.getAttribute("uname");
 	String name = (String)session.getAttribute("name");
+	String from_date = (String)session.getAttribute("from_date");
+	String to_date = (String)session.getAttribute("to_date");
+	session.setAttribute("from_date", from_date);
+	session.setAttribute("to_date", to_date);
 	int size = (int)session.getAttribute("size");
 	session.setAttribute("uname", uname);
 	session.setAttribute("name", name);
-	System.out.println("search_page1 - "+name+" "+size);
+	System.out.println("search_page1 - "+name+" "+size+" "+from_date+" "+to_date);
 	
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">

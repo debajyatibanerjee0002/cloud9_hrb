@@ -1,18 +1,11 @@
+<%
+	String room_id = (String)session.getAttribute("room_id");
+	String uname = (String)session.getAttribute("uname");
+	System.out.println(uname);
+%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-<%@ page import="java.sql.*" import="com.connection.SingletonConnection"%> 
-<%@ page import="java.util.ArrayList" import="user.search.searchClass.HotelSearchResult" %> 
-<%
-	String uname = (String)session.getAttribute("uname");
-	String name = (String)session.getAttribute("name");
-	String from_date = (String)session.getAttribute("from_date");
-	String to_date = (String)session.getAttribute("to_date");
-	session.setAttribute("from_date", from_date);
-	session.setAttribute("to_date", to_date);
-	session.setAttribute("uname", uname);
-	session.setAttribute("name", name);
-	System.out.println("search_page2 - "+name+" "+from_date+" "+to_date);
-%>
+<%@ page import="java.sql.*" import="com.connection.SingletonConnection"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -29,7 +22,11 @@
 <link href="fontawesome/css/brands.css" rel="stylesheet">
 <link href="fontawesome/css/solid.css" rel="stylesheet">
 <link href="../../styles/form_page.css" rel="stylesheet">
-
+<style type="text/css">
+.jumbotron {
+    margin-left: 0px;
+}
+</style>
 </head>
 <body>
 <section>
@@ -42,26 +39,33 @@
 	        <span class="navbar-toggler-icon"></span>
 	    </button>
 	    <div class="collapse navbar-collapse" id="navbarMenu">
-	        <span class="navbar-nav ml-auto" style="font-size:1.5rem; font-weight:bold; color:white">ROOM SEARCH RESULT</span>
+	        <span class="navbar-nav ml-auto" style="font-size:1.5rem; font-weight:bold; color:white">YOUR ALL BOOKINGS</span>
 	        <ul class="navbar-nav ml-auto">
 	            <li class="nav-item">
-	                <a href="./search_page1.jsp" class="nav-link custom-button2">Back</a>
+	                <a href="../user_login_success.jsp" class="nav-link custom-button2">Back</a>
 	            </li>
 	        </ul>
 	    </div>
 	</nav>
 </section>
 <section id="#">
-<div class="container">
+<div class="">
 	<div class="jumbotron">
 	  <table class="table table-dark">
 		  <thead>
 		    <tr>
-		      <th scope="col">ROOM_ID</th>
-		      <th scope="col">A/C</th>
-		      <th scope="col">WIFI</th>
-		      <th scope="col">ROOM_TYPE</th>
-		      <th scope="col">AVAILABLE</th>
+		      <th scope="col">BILL NO</th>
+		      <th scope="col">H/R NAME</th>
+		      <th scope="col">USER ID</th>
+		      <th scope="col">NAME</th>
+		      <th scope="col">AGE</th>
+		      <th scope="col">ROOM TYPE</th>
+		      <th scope="col">NO OF GUESTS</th>
+		      <th scope="col">GUESTS NAME</th>
+		      <th scope="col">CHECK IN DATE</th>
+		      <th scope="col">CHECK OUT DATE</th>
+		      <th scope="col">NO OF NIGHTS</th>
+		      <th scope="col">TOTAL AMOUNT</th>
 		    </tr>
 		  </thead>
 		  <tbody>
@@ -69,22 +73,27 @@
 				  	try{
 				  		Connection con = SingletonConnection.getSingletonConnection();
 		    			PreparedStatement psmt;	
-		    			String hotel_id = request.getParameter("val");
 		    			String avail = "yes";
-		    			String query = "SELECT * FROM HRB_ROOM WHERE HOTEL_ID=? AND AVAILABLE=?";
+		    			String query = "SELECT * FROM HRB_BOOKING WHERE USER_ID=?";
 		    			psmt = con.prepareStatement(query);
-		    			psmt.setString(1, hotel_id);
-		    			psmt.setString(2, avail);
+		    			psmt.setString(1, uname);
 		    			ResultSet rs = psmt.executeQuery();
 		    			while(rs.next()){
 		    				%>
 		    				<tr>
-						      <td><%=rs.getString("ROOM_ID") %></td>
-						      <td><%=rs.getString("AC") %></td>
-						      <td><%=rs.getString("WIFI") %></td>
-						      <td><%=rs.getString("ROOM_TYPE") %></td>
-						      <td><%=rs.getString("AVAILABLE") %></td>
-						      <td><a href="../booking/booking_entry_page.jsp?val=<%=rs.getString("ROOM_ID") %>" class="btn btn-success btn-cus">GO</a></td>
+						      <td><%=rs.getString("BILL_NO") %></td>
+						      <td><%=rs.getString("HOTEL_RESORT_NAME") %></td>
+						      <td><%=rs.getString("USER_ID") %></td>
+						      <td><%=rs.getString("USER_NAME") %></td>
+						      <td><%=rs.getString("AGE") %></td>
+						      <td><%=rs.getString("TYPE_OF_ROOM") %></td>
+						      <td><%=rs.getString("NO_OF_GUEST") %></td>
+						      <td><%=rs.getString("GUEST_NAME") %></td>
+						      <td><%=rs.getString("CHECK_IN_DATE") %></td>
+						      <td><%=rs.getString("CHECK_OUT_DATE") %></td>
+						      <td><%=rs.getString("NO_OF_NIGHT") %></td>
+						      <td><%=rs.getString("TOTAL_AMOUNT") %></td>
+						      <td><a href="../booking/booking_entry_page.jsp?val=<%=room_id %>" class="btn btn-danger btn-cus">DELETE</a></td>
 						    </tr>
 		    				<%
 		    			}
