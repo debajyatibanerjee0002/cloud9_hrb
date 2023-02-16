@@ -114,8 +114,8 @@
 		    <div class="col-sm-10">
 		        <select class="form-select" aria-label="Default select example" name="available">
 				  <option selected>-- SELECT --</option>
-				  <option value="yes">Yes</option>
-				  <option value="no">No</option>
+				  <option value="YES">Yes</option>
+				  <option value="NO">No</option>
 				</select>
 		    </div>
 		  </div>		  

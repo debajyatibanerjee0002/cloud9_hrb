@@ -70,7 +70,7 @@
 				  		Connection con = SingletonConnection.getSingletonConnection();
 		    			PreparedStatement psmt;	
 		    			String hotel_id = request.getParameter("val");
-		    			String avail = "yes";
+		    			String avail = "YES";
 		    			String query = "SELECT * FROM HRB_ROOM WHERE HOTEL_ID=? AND AVAILABLE=?";
 		    			psmt = con.prepareStatement(query);
 		    			psmt.setString(1, hotel_id);

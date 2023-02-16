@@ -71,11 +71,15 @@
 				  	try{
 				  		Connection con = SingletonConnection.getSingletonConnection();
 		    			PreparedStatement psmt;	
+		    			String user = "admin";
 		    			String avail = "yes";
 		    			String query = "SELECT * FROM HRB_BOOKING";
 		    			psmt = con.prepareStatement(query);
 		    			ResultSet rs = psmt.executeQuery();
 		    			while(rs.next()){
+		    				String s = rs.getString("BILL_NO");
+		    				s = s.substring(5);
+		    				System.out.println(s);
 		    				%>
 		    				<tr>
 						      <td><%=rs.getString("BILL_NO") %></td>
@@ -90,7 +94,7 @@
 						      <td><%=rs.getString("CHECK_OUT_DATE") %></td>
 						      <td><%=rs.getString("NO_OF_NIGHT") %></td>
 						      <td><%=rs.getString("TOTAL_AMOUNT") %></td>
-						      <td><a href="../booking/booking_entry_page.jsp?val=<%=room_id %>" class="btn btn-danger btn-cus">DELETE</a></td>
+						      <td><a href="/cloud9_hrb/BookingDelete?val=<%=s %>&val2=<%=user %>&val3=<%=rs.getString("BILL_NO") %>" class="btn btn-danger btn-cus">DELETE</a></td>
 						    </tr>
 		    				<%
 		    			}

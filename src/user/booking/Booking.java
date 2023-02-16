@@ -27,7 +27,6 @@ public class Booking extends HttpServlet {
 		Connection conn;
 		PreparedStatement psmt;
 		try{
-			String format = "yyyy-mm-dd";
 			conn = SingletonConnection.getSingletonConnection();
 			String bill_no = request.getParameter("bill_no");
 			String hotel_id = request.getParameter("hotel_id");

@@ -1,7 +1,8 @@
 <%
 	String room_id = (String)session.getAttribute("room_id");
 	String uname = (String)session.getAttribute("uname");
-	System.out.println(uname);
+	session.setAttribute("room_id", room_id);
+	System.out.println(uname+" "+room_id);
 %>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
@@ -73,13 +74,18 @@
 				  	try{
 				  		Connection con = SingletonConnection.getSingletonConnection();
 		    			PreparedStatement psmt;	
+		    			String user = "user";
 		    			String avail = "yes";
 		    			String query = "SELECT * FROM HRB_BOOKING WHERE USER_ID=?";
 		    			psmt = con.prepareStatement(query);
 		    			psmt.setString(1, uname);
 		    			ResultSet rs = psmt.executeQuery();
 		    			while(rs.next()){
+		    				String s = rs.getString("BILL_NO");
+		    				s = s.substring(5);
+		    				System.out.println(s);
 		    				%>
+		    				
 		    				<tr>
 						      <td><%=rs.getString("BILL_NO") %></td>
 						      <td><%=rs.getString("HOTEL_RESORT_NAME") %></td>
@@ -93,7 +99,7 @@
 						      <td><%=rs.getString("CHECK_OUT_DATE") %></td>
 						      <td><%=rs.getString("NO_OF_NIGHT") %></td>
 						      <td><%=rs.getString("TOTAL_AMOUNT") %></td>
-						      <td><a href="../booking/booking_entry_page.jsp?val=<%=room_id %>" class="btn btn-danger btn-cus">DELETE</a></td>
+						      <td><a href="/cloud9_hrb/BookingDelete?val=<%=s %>&val2=<%=user %>&val3=<%=rs.getString("BILL_NO") %>" class="btn btn-danger btn-cus">DELETE</a></td>
 						    </tr>
 		    				<%
 		    			}
